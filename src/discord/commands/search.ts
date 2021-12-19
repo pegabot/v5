@@ -9,7 +9,7 @@ bot.regsisterCommand(
     options: [{ type: "STRING", name: "name", description: "Wie lautete die Person, nach welcher du suchst?", required: true }],
   },
   async (interaction) => {
-    interaction.deferReply();
+    await interaction.deferReply();
     const name = interaction.options.getString("name");
 
     if (!name) return interaction.reply("Es gab einen Fehler, versuche es erneut!");
@@ -18,6 +18,6 @@ bot.regsisterCommand(
 
     if (!list) return interaction.reply("Die Person konnte nicht gefunden werden!");
 
-    interaction.editReply({ files: [list[0][1]] });
+    await interaction.editReply({ files: [list[0][1]] });
   },
 );

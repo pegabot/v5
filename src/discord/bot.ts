@@ -6,7 +6,7 @@ export class Bot {
     partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
 
-  commandCallbacks: Map<string, (interaction: CommandInteraction) => void> = new Map();
+  commandCallbacks: Map<string, (interaction: CommandInteraction) => Promise<void>> = new Map();
 
   constructor() {
     this.setupProcessEventHandlers();
@@ -20,7 +20,7 @@ export class Bot {
     this.client.on(name, callback);
   }
 
-  async regsisterCommand(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => void) {
+  async regsisterCommand(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => Promise<void>) {
     // get guild from cache first. If guild is not present fetch from API.
     let guild = this.client.guilds.cache.get(process.env.GUILD_ID);
     if (!guild) {

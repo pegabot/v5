@@ -1,6 +1,6 @@
 import { bot } from "../../main";
 
-bot.registerEvent("interactionCreate", (interaction) => {
+bot.registerEvent("interactionCreate", async (interaction) => {
   //Type Guard to ensure that interaction is a message command
   if (interaction.isCommand()) {
     // get the callback from the callback map and execute
@@ -8,6 +8,10 @@ bot.registerEvent("interactionCreate", (interaction) => {
 
     if (!callback) return interaction.reply("Der zugehörige Command wurde nicht gefunden");
 
-    callback(interaction);
+    try {
+      await callback(interaction);
+    } catch (e) {
+      interaction.followUp("Beim Verarbeiten deiner Anfrage kam es zu einem Fehler!");
+    }
   }
 });
