@@ -1,24 +1,25 @@
 {
-  "name": "ts-starter",
-  "description": "Template repository for TypeScript Node.js Apps",
+  "name": "studip-people-searcher",
+  "description": "Discord Bot which searches for people on @uni-giessen's Stud.Ip for you",
   "version": "x.y.z",
   "main": "build/main.js",
-  "author": "Pegasus Spiele Verlags- und Medienvertriebsgesellschaft mbH",
+  "author": "Nico Finkernagel <nico@gruselhaus.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pegasusspiele/ts-starter.git"
+    "url": "https://github.com/gruselhaus/studip-people-searcher.git"
   },
   "engines": {
-    "node": ">14.x"
+    "node": ">=16.x"
   },
   "scripts": {
     "test": "jest . --verbose",
     "dev": "nodemon .  --signal SIGINT NODE_ENV=development",
     "build": "rm -rf build; tsc",
     "start": "NODE_ENV=production node .",
-    "start:dev": "node .",
-    "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e ."
+    "start:dev": "NODE_ENV=development node .",
+    "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e .",
+    "actions": "act --rm"
   },
   "dependencies": {
     "discord.js": "^13.3.1",
