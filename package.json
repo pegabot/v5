@@ -17,10 +17,11 @@
     "dev": "nodemon .  --signal SIGINT NODE_ENV=development",
     "build": "rm -rf build; tsc",
     "start": "NODE_ENV=production node .",
-    "build-start": "rm -rf build; tsc; node .",
+    "start:dev": "node .",
     "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e ."
   },
   "dependencies": {
+    "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "puppeteer": "^13.0.0"
   },
@@ -48,6 +49,6 @@
       "dist/*"
     ],
     "ext": "ts",
-    "exec": "yarn build --sourceMap; yarn start"
+    "exec": "yarn build --sourceMap; yarn start:dev"
   }
 }
