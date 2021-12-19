@@ -1,5 +1,5 @@
 import { bot } from "../../main";
-import { getUserList } from "../../studip/bridge";
+import { getSearchResult } from "../../studip/bridge";
 
 bot.regsisterCommand(
   {
@@ -14,10 +14,10 @@ bot.regsisterCommand(
 
     if (!name) return interaction.reply("Es gab einen Fehler, versuche es erneut!");
 
-    const list = await getUserList(name);
+    const list = await getSearchResult(name);
 
     if (!list) return interaction.reply("Die Person konnte nicht gefunden werden!");
 
-    interaction.editReply({ files: [list[1]] });
+    interaction.editReply({ files: [list[0][1]] });
   },
 );

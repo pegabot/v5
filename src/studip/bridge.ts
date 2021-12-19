@@ -1,8 +1,8 @@
 import puppeteer from "puppeteer";
 import { User } from "../structures/User";
 
-export const getUserList = async (name: string): Promise<[User, Buffer] | null> => {
-  const browser = await puppeteer.launch({ headless: process.env.NODE_ENV === "development" ? false : true });
+export const getSearchResult = async (name: string): Promise<[User, Buffer][] | null> => {
+  const browser = await puppeteer.launch({ headless: process.env.NODE_ENV !== "development" });
   const page = await browser.newPage();
   await page.goto("https://studip.uni-giessen.de");
 
@@ -21,10 +21,15 @@ export const getUserList = async (name: string): Promise<[User, Buffer] | null> 
   await page.type("#search-input", name);
   await page.waitForNavigation();
 
-  const user = await page.$eval("#GlobalSearchUsers-body a", (e) => [e.getElementsByTagName("mark")[0]?.innerText, e.getAttribute("href")]);
-  const screenshot = await page.screenshot();
+  try {
+    const user = await page.$eval("#GlobalSearchUsers-body a", (e) => [e.getElementsByTagName("mark")[0]?.innerText, e.getAttribute("href")]);
+    const screenshot = await page.screenshot();
 
-  await browser.close();
+    await browser.close();
 
-  return !user ? null : [{ name: user[0], url: user[1] }, screenshot as Buffer];
+    return !user ? null : [[{ name: user[0], url: user[1] }, screenshot as Buffer]];
+  } catch (e) {
+    await browser.close();
+    return null;
+  }
 };
