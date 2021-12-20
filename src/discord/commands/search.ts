@@ -18,6 +18,6 @@ bot.regsisterCommand(
 
     if (!list) return interaction.reply("Die Person konnte nicht gefunden werden!");
 
-    await interaction.editReply({ files: [list[0][1]] });
+    await interaction.editReply({ files: [list.screenshot] });
   },
 );

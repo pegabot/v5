@@ -1,8 +1,16 @@
 import puppeteer from "puppeteer";
 import { User } from "../structures/User";
 
-export const getSearchResult = async (name: string): Promise<[User, Buffer][] | null> => {
-  const browser = await puppeteer.launch({ headless: process.env.NODE_ENV !== "development" });
+export const getSearchResult = async (name: string): Promise<{ users: User[]; screenshot: Buffer } | null> => {
+  const browser = await puppeteer.launch({
+    headless: process.env.NODE_ENV !== "development",
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--window-size=1080,720"],
+    defaultViewport: {
+      width: 1080,
+      height: 720,
+    },
+  });
+
   const page = await browser.newPage();
   await page.goto("https://studip.uni-giessen.de");
 
@@ -22,12 +30,34 @@ export const getSearchResult = async (name: string): Promise<[User, Buffer][] | 
   await page.waitForNavigation();
 
   try {
-    const user = await page.$eval("#GlobalSearchUsers-body a", (e) => [e.getElementsByTagName("mark")[0]?.innerText, e.getAttribute("href")]);
+    const users: User[] = await page
+      .$$eval("#GlobalSearchUsers-body a", (elements) =>
+        elements
+          .map((e) => {
+            const innerText = e.getElementsByTagName("mark")[0]?.innerText;
+            return innerText ? [innerText, e.getAttribute("href")] : [];
+          })
+          .filter((e) => e.length > 0),
+      )
+      .then((elements) =>
+        elements.map((e) => {
+          return {
+            name: e[0],
+            url: e[1],
+          };
+        }),
+      );
+
     const screenshot = await page.screenshot();
 
     await browser.close();
 
-    return !user ? null : [[{ name: user[0], url: user[1] }, screenshot as Buffer]];
+    return users.length < 1
+      ? null
+      : {
+          users,
+          screenshot: screenshot as Buffer,
+        };
   } catch (e) {
     await browser.close();
     return null;

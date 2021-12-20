@@ -9,11 +9,11 @@ describe("Bridge", () => {
     const result = await getSearchResult("Nico Finkernagel");
 
     expect(result).not.toBeNull();
-    expect(result?.length).toBeGreaterThan(0);
+    expect(result?.users.length).toBeGreaterThan(0);
 
-    for (const element of result || []) {
-      expect(element[0]).toHaveProperty("name");
-      expect(element[0]).toHaveProperty("url");
+    for (const element of result?.users || []) {
+      expect(element).toHaveProperty("name");
+      expect(element).toHaveProperty("url");
     }
   }, 30000);
 
