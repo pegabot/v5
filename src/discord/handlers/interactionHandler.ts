@@ -31,7 +31,7 @@ export class InteractionHandler {
 
     this.bot.logger.info(`publishing ${this.commandData.length} commands on ${guilds.size} servers`);
 
-    //register the commands on all servers the bot is a member of
+    //publish the commands on all servers the bot is a member of
     return await Promise.all([
       guilds.forEach(async (guild) => {
         await (guild as Guild)?.commands.set(this.commandData);
