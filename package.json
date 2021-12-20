@@ -18,7 +18,7 @@
     "build": "rm -rf build; tsc",
     "start": "NODE_ENV=production node .",
     "start:dev": "NODE_ENV=development node .",
-    "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e .",
+    "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e .; sh ./scripts/injectHeader.sh",
     "actions": "act --rm"
   },
   "dependencies": {

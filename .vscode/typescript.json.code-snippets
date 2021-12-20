@@ -1,0 +1,9 @@
+{
+  "Header": {
+    "prefix": [
+      "Header"
+    ],
+    "body": "/*\n * Copyright (c) 2021 Nico Finkernagel\n * This code is licensed under the MIT license\n * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)\n */",
+    "description": "The header for the source code files."
+  }
+}
