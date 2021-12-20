@@ -4,4 +4,5 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
+import "./commands/invite";
 import "./commands/search";
