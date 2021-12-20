@@ -7,7 +7,7 @@
 import { MessageActionRow, MessageButton } from "discord.js";
 import { bot } from "../../main";
 
-bot.interactionHandler.register({ name: "invite", description: "Lade diesen Bot auf deinene Server ein!", type: "CHAT_INPUT" }, async (interaction) => {
+bot.interactionHandler.register({ name: "invite", description: "Lade diesen Bot auf deinen Server ein!", type: "CHAT_INPUT" }, async (interaction) => {
   const row = new MessageActionRow().addComponents(
     new MessageButton()
       .setLabel("Diesen Bot einladen")
