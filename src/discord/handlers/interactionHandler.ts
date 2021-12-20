@@ -4,7 +4,7 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
-import { ApplicationCommandDataResolvable, CommandInteraction } from "discord.js";
+import { ApplicationCommandDataResolvable, Collection, CommandInteraction, Guild, OAuth2Guild } from "discord.js";
 import { Bot } from "../bot";
 
 export class InteractionHandler {
@@ -13,14 +13,21 @@ export class InteractionHandler {
   constructor(private bot: Bot) {}
 
   async register(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => Promise<void>) {
-    // get guild from cache first. If guild is not present fetch from API.
-    let guild = this.bot.client.guilds.cache.get(process.env.GUILD_ID);
-    if (!guild) {
-      guild = await this.bot.client.guilds.fetch(process.env.GUILD_ID);
-    }
-
     //register the command
     this.commandCallbacks.set(command.name, callback);
-    return await guild?.commands.set([command]);
+
+    // get guilds from cache first. If guilds are not present fetch from API.
+    let guilds: Collection<string, Guild | OAuth2Guild> = this.bot.client.guilds.cache;
+
+    if (!guilds || guilds.size < 1) {
+      guilds = await this.bot.client.guilds.fetch();
+    }
+
+    // register the commands on all servers the bot is a member of
+    return await Promise.all([
+      guilds.forEach(async (guild) => {
+        await (guild as Guild)?.commands.set([command]);
+      }),
+    ]);
   }
 }
