@@ -4,7 +4,10 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
-import { ApplicationCommandDataResolvable, Client, ClientEvents, CommandInteraction, Intents } from "discord.js";
+import { Client, Intents } from "discord.js";
+import { EventHandler } from "./handlers/eventHandler";
+import { InteractionHandler } from "./handlers/interactionHandler";
+import { ProcessEventHandler } from "./handlers/processEventHandler";
 
 export class Bot {
   client = new Client({
@@ -12,46 +15,15 @@ export class Bot {
     partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
 
-  commandCallbacks: Map<string, (interaction: CommandInteraction) => Promise<void>> = new Map();
+  eventHandler = new EventHandler(this);
+  interactionHandler = new InteractionHandler(this);
+  processEventHandler = new ProcessEventHandler(this);
 
   constructor() {
-    this.setupProcessEventHandlers();
+    this.processEventHandler.setupEvents();
   }
 
   login() {
     return this.client.login(process.env.BOT_TOKEN);
-  }
-
-  registerEvent<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => void) {
-    this.client.on(name, callback);
-  }
-
-  async regsisterCommand(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => Promise<void>) {
-    // get guild from cache first. If guild is not present fetch from API.
-    let guild = this.client.guilds.cache.get(process.env.GUILD_ID);
-    if (!guild) {
-      guild = await this.client.guilds.fetch(process.env.GUILD_ID);
-    }
-
-    //register the command
-    this.commandCallbacks.set(command.name, callback);
-    return await guild?.commands.set([command]);
-  }
-
-  private setupProcessEventHandlers(): void {
-    process.on("SIGINT", (signal) => {
-      this.destroy(signal);
-    });
-
-    process.on("SIGTERM", (signal) => {
-      this.destroy(signal);
-    });
-  }
-
-  private async destroy(signal?: NodeJS.Signals): Promise<void> {
-    console.log(`${signal || "Exit signal"} recieved, destroying the bot.`);
-
-    this.client.destroy();
-    process.exit(0);
   }
 }

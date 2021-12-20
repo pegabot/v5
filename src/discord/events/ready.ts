@@ -6,7 +6,7 @@
 
 import { bot } from "../../main";
 
-export default bot.registerEvent("ready", () => {
+export default bot.eventHandler.register("ready", () => {
   // the bot is ready => load and register the commands
   require("../commands");
 

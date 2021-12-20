@@ -7,7 +7,7 @@
 import { bot } from "../../main";
 import { getSearchResult } from "../../studip/bridge";
 
-bot.regsisterCommand(
+bot.interactionHandler.register(
   {
     name: "search",
     type: "CHAT_INPUT",
