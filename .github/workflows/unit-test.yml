@@ -18,6 +18,6 @@ jobs:
         run: yarn test
       - name: Run build
         run: yarn build
-        env:
-          STUDIP_USER: ${{secrets.STUDIP_USER}}
-          STUDIP_PASSWORD: ${{secrets.STUDIP_PASSWORD}}
+    env:
+      STUDIP_USER: ${{secrets.STUDIP_USER}}
+      STUDIP_PASSWORD: ${{secrets.STUDIP_PASSWORD}}
