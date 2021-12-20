@@ -9,6 +9,5 @@ declare namespace NodeJS {
     STUDIP_USER: string;
     STUDIP_PASSWORD: string;
     BOT_TOKEN: string;
-    GUILD_ID: string;
   }
 }
