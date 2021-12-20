@@ -6,11 +6,12 @@
 
 import { bot } from "../../main";
 
-export default bot.eventHandler.register("ready", () => {
-  // the bot is ready => load and register the commands
-  require("../commands");
+export default bot.eventHandler.register("ready", async () => {
+  // the bot is ready => register and publish the commands
+  await require("../commands");
+  bot.interactionHandler.publish();
 
   bot.client.user?.presence.set({ status: "idle", activities: [{ type: "WATCHING", name: "aus dem Fenster 🪟" }] });
 
-  console.log("ONLINE");
+  bot.logger.info("Bot is online and ready");
 });

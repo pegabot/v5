@@ -8,14 +8,20 @@ import { ApplicationCommandDataResolvable, Collection, CommandInteraction, Guild
 import { Bot } from "../bot";
 
 export class InteractionHandler {
+  commandData: Array<ApplicationCommandDataResolvable> = new Array();
   commandCallbacks: Map<string, (interaction: CommandInteraction) => Promise<void>> = new Map();
 
   constructor(private bot: Bot) {}
 
-  async register(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => Promise<void>) {
-    //register the command
-    this.commandCallbacks.set(command.name, callback);
+  register(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => Promise<void>) {
+    this.bot.logger.info(`registering command (${command.name})`);
 
+    //register the command
+    this.commandData.push(command);
+    this.commandCallbacks.set(command.name, callback);
+  }
+
+  async publish() {
     // get guilds from cache first. If guilds are not present fetch from API.
     let guilds: Collection<string, Guild | OAuth2Guild> = this.bot.client.guilds.cache;
 
@@ -23,10 +29,12 @@ export class InteractionHandler {
       guilds = await this.bot.client.guilds.fetch();
     }
 
-    // register the commands on all servers the bot is a member of
+    this.bot.logger.info(`publishing ${this.commandData.length} commands on ${guilds.size} servers`);
+
+    //register the commands on all servers the bot is a member of
     return await Promise.all([
       guilds.forEach(async (guild) => {
-        await (guild as Guild)?.commands.set([command]);
+        await (guild as Guild)?.commands.set(this.commandData);
       }),
     ]);
   }
