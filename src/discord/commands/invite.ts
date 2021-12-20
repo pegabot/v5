@@ -8,11 +8,6 @@ import { MessageActionRow, MessageButton } from "discord.js";
 import { bot } from "../../main";
 
 bot.interactionHandler.register({ name: "invite", description: "Lade diesen Bot auf deinen Server ein!", type: "CHAT_INPUT" }, async (interaction) => {
-  const row = new MessageActionRow().addComponents(
-    new MessageButton()
-      .setLabel("Diesen Bot einladen")
-      .setStyle("LINK")
-      .setURL("https://discord.com/api/oauth2/authorize?client_id=922091031539904533&permissions=2147483648&scope=applications.commands%20bot"),
-  );
+  const row = new MessageActionRow().addComponents(new MessageButton().setLabel("Diesen Bot einladen").setStyle("LINK").setURL(process.env.INVITE_LINK));
   interaction.reply({ content: "Here you go 🎉", components: [row] });
 });
