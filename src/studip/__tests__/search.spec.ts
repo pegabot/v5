@@ -6,11 +6,11 @@
 
 import { config } from "dotenv";
 import "jest";
-import { getSearchResult } from "../bridge";
+import { getSearchResult } from "../search";
 
 config();
 
-describe("Bridge", () => {
+describe("Search", () => {
   it("should return correct search result", async () => {
     const result = await getSearchResult("Nico Finkernagel");
 

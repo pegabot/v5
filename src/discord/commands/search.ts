@@ -5,7 +5,7 @@
  */
 
 import { bot } from "../../main";
-import { getSearchResult } from "../../studip/bridge";
+import { getSearchResult } from "../../studip/search";
 
 bot.interactionHandler.register(
   {
