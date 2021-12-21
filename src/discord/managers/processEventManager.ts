@@ -6,7 +6,7 @@
 
 import { Bot } from "../bot";
 
-export class ProcessEventHandler {
+export class ProcessEventManager {
   constructor(private bot: Bot) {}
 
   setupEvents(): void {

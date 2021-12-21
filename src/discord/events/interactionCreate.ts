@@ -6,11 +6,11 @@
 
 import { bot } from "../../main";
 
-bot.eventHandler.register("interactionCreate", async (interaction) => {
+bot.eventManager.register("interactionCreate", async (interaction) => {
   //Type Guard to ensure that interaction is a message command
   if (interaction.isCommand()) {
     // get the callback from the callback map and execute
-    const callback = bot.interactionHandler.commandCallbacks.get(interaction.commandName);
+    const callback = bot.InteractionManager.commandCallbacks.get(interaction.commandName);
 
     if (!callback) return interaction.reply("Der zugehörige Command wurde nicht gefunden");
 

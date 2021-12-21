@@ -6,10 +6,10 @@
 
 import { bot } from "../../main";
 
-export default bot.eventHandler.register("ready", async () => {
+export default bot.eventManager.register("ready", async () => {
   // the bot is ready => register and publish the commands
   await require("../commands");
-  bot.interactionHandler.publish();
+  bot.InteractionManager.publish();
 
   bot.client.user?.presence.set({ status: "idle", activities: [{ type: "WATCHING", name: "aus dem Fenster 🪟" }] });
 

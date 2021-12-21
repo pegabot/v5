@@ -7,7 +7,7 @@
 import puppeteer from "puppeteer";
 import { User } from "../structures/User";
 
-export const getSearchResult = async (name: string): Promise<{ users: User[]; screenshot: Buffer } | null> => {
+export const getSearchResult = async (name: string): Promise<{ users: User[]; screenshot: Buffer | null } | null> => {
   const browser = await puppeteer.launch({
     headless: process.env.NODE_ENV !== "development",
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--window-size=1080,720"],
@@ -59,7 +59,10 @@ export const getSearchResult = async (name: string): Promise<{ users: User[]; sc
     await browser.close();
 
     return users.length < 1
-      ? null
+      ? {
+          users: [],
+          screenshot: null,
+        }
       : {
           users,
           screenshot: screenshot as Buffer,

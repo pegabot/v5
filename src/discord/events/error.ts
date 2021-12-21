@@ -6,4 +6,4 @@
 
 import { bot } from "../../main";
 
-bot.eventHandler.register("error", (message) => bot.logger.error(message));
+bot.eventManager.register("error", (message) => bot.logger.error(message));

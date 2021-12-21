@@ -4,6 +4,7 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
-import { bot } from "../../main";
-
-bot.eventManager.register("warn", (message) => bot.logger.warn(message));
+export enum messages {
+  COMMAND_INTERNAL_ERROR = "An error ocurred, pleasy try again later!",
+  COMMAND_USER_NOT_FOUND = "The user couldn't be found!",
+}

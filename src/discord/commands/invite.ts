@@ -6,8 +6,15 @@
 
 import { MessageActionRow, MessageButton } from "discord.js";
 import { bot } from "../../main";
+import { getLocale } from "../utils/locales";
 
-bot.interactionHandler.register({ name: "invite", description: "Lade diesen Bot auf deinen Server ein!", type: "CHAT_INPUT" }, async (interaction) => {
-  const row = new MessageActionRow().addComponents(new MessageButton().setLabel("Diesen Bot einladen").setStyle("LINK").setURL(process.env.INVITE_LINK));
-  interaction.reply({ content: "Here you go 🎉", components: [row] });
+bot.InteractionManager.register({ name: "invite", description: "Invite this bot to your server!", type: "CHAT_INPUT" }, async (interaction) => {
+  const locale = await getLocale(interaction.guildId);
+  bot.i18n.setLocale(locale);
+
+  const row = new MessageActionRow().addComponents(
+    new MessageButton().setLabel(bot.i18n.__("Invite this bot")).setStyle("LINK").setURL(process.env.INVITE_LINK),
+  );
+
+  interaction.reply({ content: bot.i18n.__("Here you go 🎉"), components: [row] });
 });

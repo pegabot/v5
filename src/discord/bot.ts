@@ -5,10 +5,13 @@
  */
 
 import { Client, Intents } from "discord.js";
+import { I18n } from "i18n";
+import Keyv from "keyv";
+import path from "path";
 import { createLogger, format, transports } from "winston";
-import { EventHandler } from "./handlers/eventHandler";
-import { InteractionHandler } from "./handlers/interactionHandler";
-import { ProcessEventHandler } from "./handlers/processEventHandler";
+import { EventManager } from "./managers/eventManager";
+import { InteractionManager } from "./managers/interactionManager";
+import { ProcessEventManager } from "./managers/processEventManager";
 
 export class Bot {
   client = new Client({
@@ -16,15 +19,23 @@ export class Bot {
     partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
 
-  eventHandler = new EventHandler(this);
-  interactionHandler = new InteractionHandler(this);
-  processEventHandler = new ProcessEventHandler(this);
+  eventManager = new EventManager(this);
+  InteractionManager = new InteractionManager(this);
+  ProcessEventManager = new ProcessEventManager(this);
 
   logger = createLogger();
 
+  keyv = new Keyv(process.env.REDIS_URL);
+  i18n = new I18n();
+
   constructor() {
-    this.processEventHandler.setupEvents();
+    this.ProcessEventManager.setupEvents();
     this.logger.add(new transports.Console({ format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()) }));
+    this.i18n.configure({
+      defaultLocale: "en",
+      locales: ["en", "de"],
+      directory: path.join(__dirname, "/../../locales"),
+    });
   }
 
   login() {

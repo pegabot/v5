@@ -4,16 +4,17 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
-import { ApplicationCommandDataResolvable, Collection, CommandInteraction, Guild, OAuth2Guild } from "discord.js";
+import { ApplicationCommandData, ChatInputApplicationCommandData, Collection, CommandInteraction, Guild, OAuth2Guild } from "discord.js";
 import { Bot } from "../bot";
+import { getLocale } from "../utils/locales";
 
-export class InteractionHandler {
-  commandData: Array<ApplicationCommandDataResolvable> = new Array();
+export class InteractionManager {
+  commandData: Array<ApplicationCommandData> = new Array();
   commandCallbacks: Map<string, (interaction: CommandInteraction) => Promise<void>> = new Map();
 
   constructor(private bot: Bot) {}
 
-  register(command: ApplicationCommandDataResolvable, callback: (interaction: CommandInteraction) => Promise<void>) {
+  register(command: ApplicationCommandData, callback: (interaction: CommandInteraction) => Promise<void>) {
     this.bot.logger.info(`registering command (${command.name})`);
 
     //register the command
@@ -34,8 +35,28 @@ export class InteractionHandler {
     //publish the commands on all servers the bot is a member of
     return await Promise.all([
       guilds.forEach(async (guild) => {
-        await (guild as Guild)?.commands.set(this.commandData);
+        const locale = await getLocale(guild.id);
+
+        const data = this.localizeCommandData(this.commandData, locale);
+
+        console.log(guild.name, data);
+
+        await (guild as Guild)?.commands.set(data);
       }),
     ]);
+  }
+
+  private localizeCommandData(commands: ApplicationCommandData[], locale: string): ApplicationCommandData[] {
+    this.bot.i18n.setLocale(locale);
+
+    // TODO: add support for command options!
+    const localized: ApplicationCommandData[] = commands.map((command) => {
+      return {
+        ...command,
+        description: this.bot.i18n.__((command as ChatInputApplicationCommandData).description),
+      };
+    });
+
+    return localized;
   }
 }

@@ -7,7 +7,7 @@
 import { ClientEvents } from "discord.js";
 import { Bot } from "../bot";
 
-export class EventHandler {
+export class EventManager {
   constructor(private bot: Bot) {}
 
   register<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => void) {

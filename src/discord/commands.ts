@@ -5,4 +5,5 @@
  */
 
 import "./commands/invite";
+import "./commands/language";
 import "./commands/search";
