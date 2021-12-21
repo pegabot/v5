@@ -15,16 +15,16 @@ bot.InteractionManager.register(
     description: "Search for a person on Stud.Ip",
     options: [{ type: "STRING", name: "name", description: "Wie lautete die Person, nach welcher du suchst?", required: true }],
   },
-  async (interaction) => {
+  async (interaction, locale) => {
     await interaction.deferReply();
 
     const name = interaction.options.getString("name");
-    if (!name) return interaction.reply(bot.i18n.__(messages.COMMAND_INTERNAL_ERROR));
+    if (!name) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 
     const list = await getSearchResult(name);
-    if (!list) return interaction.reply(bot.i18n.__(messages.COMMAND_INTERNAL_ERROR));
+    if (!list) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 
-    if (list?.users.length) return interaction.reply(bot.i18n.__(messages.COMMAND_USER_NOT_FOUND));
+    if (list?.users.length) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_USER_NOT_FOUND, locale }));
 
     // TODO: this command needs attention and currently fails
     // await interaction.editReply({ files: [list.screenshot] });

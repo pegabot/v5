@@ -11,7 +11,7 @@ export default bot.eventManager.register("ready", async () => {
   await require("../commands");
   bot.InteractionManager.publish();
 
-  bot.client.user?.presence.set({ status: "idle", activities: [{ type: "WATCHING", name: "aus dem Fenster 🪟" }] });
+  bot.client.user?.presence.set({ status: "online" });
 
   bot.logger.info("Bot is online and ready");
 });

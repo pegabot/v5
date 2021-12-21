@@ -4,8 +4,9 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
+import { messages } from "../../constants/messages";
 import { bot } from "../../main";
-import { getLocale, setLocale } from "../utils/locales";
+import { getGuildLocale, setGuildLocale } from "../utils/guildLocale";
 
 bot.InteractionManager.register(
   {
@@ -25,17 +26,22 @@ bot.InteractionManager.register(
       },
     ],
   },
-  async (interaction) => {
-    const option = interaction.options.getString("language");
-    if (!option) return;
+  async (interaction, locale) => {
+    const option = interaction.options.getString(bot.i18n.__({ phrase: "language", locale }));
+    if (!option) return interaction.reply(bot.i18n.__(messages.COMMAND_TRY_AGAIN));
 
-    const current = await getLocale(interaction.guildId);
+    const current = await getGuildLocale(interaction.guildId);
 
-    await setLocale(interaction.guildId, option);
+    if (current === option) return interaction.reply(bot.i18n.__({ phrase: "Hey, looks like everything will stay the same 🤣", locale }));
 
-    bot.i18n.setLocale(option);
+    await setGuildLocale(interaction.guildId, option);
+    bot.InteractionManager.publish();
+
     await interaction.reply(
-      bot.i18n.__(`Changed the language from \`{{old}}\` to \`{{new}}\``, { old: bot.i18n.__(current || "none"), new: bot.i18n.__(option) }),
+      bot.i18n.__(`Changed the language from \`{{old}}\` to \`{{new}}\`. It may take a while for the change to be completed.`, {
+        old: bot.i18n.__({ phrase: current || "none", locale: option }),
+        new: bot.i18n.__({ phrase: option, locale: option }),
+      }),
     );
   },
 );

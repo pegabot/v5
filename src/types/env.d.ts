@@ -6,6 +6,7 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
+    NODE_ENV: string;
     REDIS_URL: string;
     STUDIP_USER: string;
     STUDIP_PASSWORD: string;

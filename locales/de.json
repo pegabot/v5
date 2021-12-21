@@ -1,8 +1,6 @@
 {
-  "de": "Deutsch",
-  "en": "Englisch",
   "none": "nichts",
-  "Changed the language from `{{old}}` to `{{new}}`": "Ich habe die Sprache von `{{old}}` zu `{{new}}` geändert.",
+  "Changed the language from `{{old}}` to `{{new}}`": "Ich habe die Sprache von `{{old}}` zu `{{new}}` geändert. Es kann einen Moment dauern, bis die Änderung durchgeführt wurde.",
   "Here you go 🎉": "Bitteschön 🎉",
   "Invite this bot to your server!": "Lade diesen Bot auf deinen Server ein!",
   "Set the language this bot uses on this server": "Lege die Sprache fest, welche dieser Bot auf diesem Server verwenden soll.",
@@ -11,5 +9,14 @@
   "language": "sprache",
   "Choose a language for this server": "Wähle eine Sprache für diesen Server",
   "name": "name",
-  "Wie lautete die Person, nach welcher du suchst?": "Wie lautete die Person, nach welcher du suchst?"
+  "Wie lautete die Person, nach welcher du suchst?": "Wie lautete die Person, nach welcher du suchst?",
+  "invite": "einladung",
+  "search": "suche",
+  "German": "Deutsch",
+  "English": "Englisch",
+  "en": "Englisch",
+  "de": "Deutsch",
+  "I'm working right now, pleasy try again shortly!": "Ich arbeite gerade, bitte versuche es in Kürze erneut!",
+  "Hey, looks like everything will stay the same 🤣": "Hey, es sieht so aus, als würde alles beim Alten bleiben 🤣",
+  "The corresponding command was not found": "Der zugehörige Command wurde nicht gefunden"
 }

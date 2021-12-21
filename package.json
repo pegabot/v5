@@ -14,10 +14,10 @@
   },
   "scripts": {
     "test": "jest . --verbose",
-    "dev": "nodemon .  --signal SIGINT NODE_ENV=development",
+    "dev": "nodemon .  --signal SIGINT",
     "build": "rm -rf build; tsc",
-    "start": "NODE_ENV=production node .",
-    "start:dev": "NODE_ENV=development node .",
+    "start": "node .",
+    "start:dev": "node .",
     "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e .; sh ./scripts/injectHeader.sh",
     "actions": "act --rm"
   },

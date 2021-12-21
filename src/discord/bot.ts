@@ -9,6 +9,7 @@ import { I18n } from "i18n";
 import Keyv from "keyv";
 import path from "path";
 import { createLogger, format, transports } from "winston";
+import { locales } from "../constants/locales";
 import { EventManager } from "./managers/eventManager";
 import { InteractionManager } from "./managers/interactionManager";
 import { ProcessEventManager } from "./managers/processEventManager";
@@ -23,17 +24,20 @@ export class Bot {
   InteractionManager = new InteractionManager(this);
   ProcessEventManager = new ProcessEventManager(this);
 
-  logger = createLogger();
+  logger = createLogger({
+    transports: [new transports.Console({ level: "debug" })],
+    format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()),
+  });
 
-  keyv = new Keyv(process.env.REDIS_URL);
+  keyv = new Keyv(process.env.REDIS_URL, { namespace: `studip-searcher-${process.env.NODE_ENV}` });
   i18n = new I18n();
 
   constructor() {
     this.ProcessEventManager.setupEvents();
-    this.logger.add(new transports.Console({ format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()) }));
+    // this.logger.add(new transports.Console({ format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()) }));
     this.i18n.configure({
       defaultLocale: "en",
-      locales: ["en", "de"],
+      locales: locales,
       directory: path.join(__dirname, "/../../locales"),
     });
   }

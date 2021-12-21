@@ -6,10 +6,10 @@
 
 import { bot } from "../../main";
 
-export const setLocale = async (guildID: string, locale: string): Promise<true> => {
+export const setGuildLocale = async (guildID: string, locale: string): Promise<true> => {
   return bot.keyv.set(`${guildID}-locale`, locale);
 };
 
-export const getLocale = async (guildID: string): Promise<string> => {
+export const getGuildLocale = async (guildID: string): Promise<string> => {
   return (await bot.keyv.get(`${guildID}-locale`)) || "en";
 };
