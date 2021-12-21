@@ -5,6 +5,7 @@
  */
 
 import { bot } from "../../main";
+import { getLocale } from "../utils/locales";
 
 bot.eventManager.register("interactionCreate", async (interaction) => {
   //Type Guard to ensure that interaction is a message command
@@ -15,6 +16,8 @@ bot.eventManager.register("interactionCreate", async (interaction) => {
     if (!callback) return interaction.reply("Der zugehörige Command wurde nicht gefunden");
 
     try {
+      const locale = await getLocale(interaction.guildId);
+      bot.i18n.setLocale(locale);
       await callback(interaction);
     } catch (e) {
       interaction.followUp("Beim Verarbeiten deiner Anfrage kam es zu einem Fehler!");

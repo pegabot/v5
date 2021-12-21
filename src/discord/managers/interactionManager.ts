@@ -49,11 +49,15 @@ export class InteractionManager {
   private localizeCommandData(commands: ApplicationCommandData[], locale: string): ApplicationCommandData[] {
     this.bot.i18n.setLocale(locale);
 
-    // TODO: add support for command options!
     const localized: ApplicationCommandData[] = commands.map((command) => {
       return {
         ...command,
-        description: this.bot.i18n.__((command as ChatInputApplicationCommandData).description),
+        description: (command as ChatInputApplicationCommandData).description ? this.bot.i18n.__((command as ChatInputApplicationCommandData).description) : "",
+        options: (command as ChatInputApplicationCommandData).options
+          ? (command as ChatInputApplicationCommandData).options?.map((option) => {
+              return { ...option, name: this.bot.i18n.__(option.name), description: this.bot.i18n.__(option.description) };
+            })
+          : [],
       };
     });
 
