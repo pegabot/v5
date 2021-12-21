@@ -13,20 +13,28 @@ bot.InteractionManager.register(
     name: "search",
     type: "CHAT_INPUT",
     description: "Search for a person on Stud.Ip",
-    options: [{ type: "STRING", name: "name", description: "Wie lautete die Person, nach welcher du suchst?", required: true }],
+    options: [{ type: "STRING", name: "name", description: "What's the name of the person you are looking for?", required: true }],
   },
   async (interaction, locale) => {
     await interaction.deferReply();
 
     const name = interaction.options.getString("name");
-    if (!name) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+    if (!name) {
+      interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+      return;
+    }
 
     const list = await getSearchResult(name);
-    if (!list) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+    if (!list) {
+      interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+      return;
+    }
 
-    if (list?.users.length) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_USER_NOT_FOUND, locale }));
+    if (list?.users.length < 1 || !list.screenshot) {
+      interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_USER_NOT_FOUND, locale }));
+      return;
+    }
 
-    // TODO: this command needs attention and currently fails
-    // await interaction.editReply({ files: [list.screenshot] });
+    await interaction.editReply({ files: [list.screenshot] });
   },
 );

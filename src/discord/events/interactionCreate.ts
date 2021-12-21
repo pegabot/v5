@@ -21,7 +21,9 @@ bot.eventManager.register("interactionCreate", async (interaction) => {
       bot.logger.info(`${interaction.guild?.name} - ${locale} => executing (${interaction.commandName})`);
       await callback(interaction, locale);
     } catch (e) {
-      interaction.followUp(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+      bot.logger.error(`Error ocurred during execution of (${interaction.commandName}) => ${e}`);
+
+      interaction.followUp({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
     }
   }
 });

@@ -23,8 +23,9 @@ describe("Search", () => {
     }
   }, 30000);
 
-  it("should return null", async () => {
+  it("should return an empty array", async () => {
     const result = await getSearchResult("akjbrgoabrogjbaorugbaorubgairbgwR");
-    expect(result).toBeNull();
+    expect(result?.users.length).toBe(0);
+    expect(result?.screenshot).toBeNull();
   }, 30000);
 });

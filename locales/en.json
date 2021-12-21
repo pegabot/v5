@@ -1,6 +1,5 @@
 {
   "none": "none",
-  "Changed the language from `{{old}}` to `{{new}}`": "Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed.",
   "Here you go 🎉": "Here you go 🎉",
   "Invite this bot to your server!": "Invite this bot to your server!",
   "Set the language this bot uses on this server": "Set the language this bot uses on this server",
@@ -9,7 +8,7 @@
   "language": "language",
   "Choose a language for this server": "Choose a language for this server",
   "name": "name",
-  "Wie lautete die Person, nach welcher du suchst?": "Wie lautete die Person, nach welcher du suchst?",
+  "What's the name of the person you are looking for?": "What's the name of the person you are looking for?",
   "invite": "invite",
   "search": "search",
   "German": "German",
@@ -18,5 +17,7 @@
   "en": "Englisch",
   "I'm working right now, pleasy try again shortly!": "I'm working right now, pleasy try again shortly!",
   "Hey, looks like everything will stay the same 🤣": "Hey, looks like everything will stay the same 🤣",
-  "The corresponding command was not found": "The corresponding command was not found"
+  "The corresponding command was not found": "The corresponding command was not found",
+  "The user couldn't be found!": "The user couldn't be found!",
+  "Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed.": "Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed."
 }
