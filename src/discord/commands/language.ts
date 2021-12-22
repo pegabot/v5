@@ -35,7 +35,7 @@ bot.InteractionManager.register(
     if (current === option) return interaction.reply(bot.i18n.__({ phrase: "Hey, looks like everything will stay the same 🤣", locale }));
 
     await setGuildLocale(interaction.guildId, option);
-    bot.InteractionManager.publish();
+    bot.InteractionManager.publish(interaction.guild?.id as string);
 
     await interaction.reply(
       bot.i18n.__(

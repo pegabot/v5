@@ -4,15 +4,9 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
-import {
-  ApplicationCommandChoicesOption,
-  ApplicationCommandData,
-  ChatInputApplicationCommandData,
-  Collection,
-  CommandInteraction,
-  Guild,
-  OAuth2Guild,
-} from "discord.js";
+export {};
+
+import { ApplicationCommandChoicesOption, ApplicationCommandData, ChatInputApplicationCommandData, CommandInteraction, Guild, OAuth2Guild } from "discord.js";
 import { BotCommand } from "../../structures/BotCommand";
 import { Bot } from "../bot";
 import { getGuildLocale } from "../utils/guildLocale";
@@ -30,15 +24,29 @@ export class InteractionManager {
     this.commands.push({ command, callback });
   }
 
-  async publish() {
-    // get guilds from cache first. If guilds are not present fetch from API.
-    let guilds: Collection<string, Guild | OAuth2Guild> = this.bot.client.guilds.cache;
+  async publish(guildID?: string): Promise<[void]> {
+    // if we have a guilID we want to the server with the id = guildID only
+    // then we get the guilds from cache first.
+    // If guilds are not present fetch from API.
+    let guilds: Guild[] | OAuth2Guild[] = [];
+    if (guildID) {
+      let guild = this.bot.client.guilds.cache.get(guildID);
+      if (guild) {
+        guilds = [guild];
+      } else {
+        guilds = [await this.bot.client.guilds.fetch(guildID)];
+      }
 
-    if (!guilds || guilds.size < 1) {
-      guilds = await this.bot.client.guilds.fetch();
+      this.bot.logger.info(`republising ${this.commands.length} commands on server (${guilds[0].name})`);
+    } else {
+      this.bot.logger.info(`publishing ${this.commands.length} commands on ${guilds.length} servers`);
+
+      guilds = [...this.bot.client.guilds.cache.values()];
+
+      if (!guilds || guilds.length < 1) {
+        guilds = [...(await this.bot.client.guilds.fetch()).values()];
+      }
     }
-
-    this.bot.logger.info(`publishing ${this.commands.length} commands on ${guilds.size} servers`);
 
     this.commands.forEach((c) => {
       this.bot.i18n.getLocales().forEach((locale) => {
@@ -57,8 +65,6 @@ export class InteractionManager {
           this.commands.map((e) => e.command),
           locale,
         );
-
-        this.bot.logger.info(guild.name, data);
 
         await (guild as Guild)?.commands.set(data);
       }),
