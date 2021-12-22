@@ -5,9 +5,9 @@
  */
 
 import { ApplicationCommandChoicesOption, ApplicationCommandData, ChatInputApplicationCommandData, CommandInteraction, Guild, OAuth2Guild } from "discord.js";
-import { BotCommand } from "../../structures/BotCommand";
+import { getGuildLocale } from "../../utils/guildLocale";
 import { Bot } from "../bot";
-import { getGuildLocale } from "../utils/guildLocale";
+import { BotCommand } from "../structures/BotCommand";
 
 export class InteractionManager {
   commands: Array<BotCommand> = new Array();

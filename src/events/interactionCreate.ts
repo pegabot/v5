@@ -4,8 +4,8 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
-import { messages } from "../../constants/messages";
-import { bot } from "../../main";
+import { messages } from "../constants/messages";
+import { bot } from "../main";
 import { getGuildLocale } from "../utils/guildLocale";
 
 bot.eventManager.register("interactionCreate", async (interaction) => {

@@ -4,7 +4,7 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
-import { bot } from "../../main";
+import { bot } from "../main";
 
 bot.eventManager.register("guildCreate", (guild) => {
   // when the bot joins a new server he has to deploy his commands

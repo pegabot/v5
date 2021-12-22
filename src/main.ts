@@ -7,7 +7,7 @@
 require("source-map-support").install();
 
 import { config } from "dotenv";
-import { Bot } from "./discord/bot";
+import { Bot } from "./core/bot";
 
 config();
 
@@ -15,7 +15,7 @@ export const bot = new Bot();
 
 (async () => {
   // Load the event handlers
-  require("./discord/events");
+  require("./events");
 
   await bot.login();
 })();

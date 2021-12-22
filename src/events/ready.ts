@@ -4,7 +4,7 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
-import { bot } from "../../main";
+import { bot } from "../main";
 
 export default bot.eventManager.register("ready", async () => {
   // the bot is ready => register and deploy the commands

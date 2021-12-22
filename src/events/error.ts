@@ -4,6 +4,6 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
-import { bot } from "../../main";
+import { bot } from "../main";
 
-bot.eventManager.register("debug", (message) => bot.logger.debug(message));
+bot.eventManager.register("error", (message) => bot.logger.error(message));

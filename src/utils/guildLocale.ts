@@ -4,7 +4,7 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
-import { bot } from "../../main";
+import { bot } from "../main";
 
 export const setGuildLocale = async (guildID: string, locale: string): Promise<true> => {
   return bot.keyv.set(`${guildID}-locale`, locale);
