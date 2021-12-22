@@ -35,15 +35,15 @@ export class InteractionManager {
         guilds = [await this.bot.client.guilds.fetch(guildID)];
       }
 
-      this.bot.logger.info(`redeploying ${this.commands.length} commands on server (${guilds[0].name})`);
+      this.bot.logger.info(`deploying ${this.commands.length} commands on server (${guilds[0].name})`);
     } else {
-      this.bot.logger.info(`deploying ${this.commands.length} commands on ${guilds.length} servers`);
-
       guilds = [...this.bot.client.guilds.cache.values()];
 
       if (!guilds || guilds.length < 1) {
         guilds = [...(await this.bot.client.guilds.fetch()).values()];
       }
+
+      this.bot.logger.info(`deploying ${this.commands.length} commands on ${guilds.length} servers`);
     }
 
     this.commands.forEach((c) => {

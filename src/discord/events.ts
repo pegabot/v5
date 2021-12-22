@@ -4,5 +4,6 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
+import "./events/guildCreate";
 import "./events/interactionCreate";
 import "./events/ready";
