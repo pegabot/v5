@@ -4,8 +4,6 @@
  * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
  */
 
-export {};
-
 import { ApplicationCommandChoicesOption, ApplicationCommandData, ChatInputApplicationCommandData, CommandInteraction, Guild, OAuth2Guild } from "discord.js";
 import { BotCommand } from "../../structures/BotCommand";
 import { Bot } from "../bot";
@@ -24,7 +22,7 @@ export class InteractionManager {
     this.commands.push({ command, callback });
   }
 
-  async publish(guildID?: string): Promise<[void]> {
+  async deploy(guildID?: string): Promise<[void]> {
     // if we have a guilID we want to the server with the id = guildID only
     // then we get the guilds from cache first.
     // If guilds are not present fetch from API.
@@ -37,9 +35,9 @@ export class InteractionManager {
         guilds = [await this.bot.client.guilds.fetch(guildID)];
       }
 
-      this.bot.logger.info(`republising ${this.commands.length} commands on server (${guilds[0].name})`);
+      this.bot.logger.info(`redeploying ${this.commands.length} commands on server (${guilds[0].name})`);
     } else {
-      this.bot.logger.info(`publishing ${this.commands.length} commands on ${guilds.length} servers`);
+      this.bot.logger.info(`deploying ${this.commands.length} commands on ${guilds.length} servers`);
 
       guilds = [...this.bot.client.guilds.cache.values()];
 
@@ -56,7 +54,7 @@ export class InteractionManager {
       });
     });
 
-    //publish the commands on all servers the bot is a member of
+    //deploy the commands on all servers the bot is a member of
     return await Promise.all([
       guilds.forEach(async (guild) => {
         const locale = await getGuildLocale(guild.id);
