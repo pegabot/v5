@@ -22,7 +22,7 @@ export class Bot {
 
   eventManager = new EventManager(this);
   interactionManager = new InteractionManager(this);
-  ProcessEventManager = new ProcessEventManager(this);
+  processEventManager = new ProcessEventManager(this);
 
   logger = createLogger({
     transports: [new transports.Console({ level: "debug" })],
@@ -33,7 +33,7 @@ export class Bot {
   i18n = new I18n();
 
   constructor() {
-    this.ProcessEventManager.setupEvents();
+    this.processEventManager.setupEvents();
     // this.logger.add(new transports.Console({ format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()) }));
     this.i18n.configure({
       defaultLocale: "en",
