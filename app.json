@@ -1,4 +1,3 @@
 {
-  "image": "heroku/nodejs",
-  "buildpacks": [{ "url": "jontewks/puppeteer" }]
+  "image": "heroku/nodejs"
 }
