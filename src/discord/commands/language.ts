@@ -38,10 +38,13 @@ bot.InteractionManager.register(
     bot.InteractionManager.publish();
 
     await interaction.reply(
-      bot.i18n.__(`Changed the language from \`{{old}}\` to \`{{new}}\`. It may take a while for the change to be completed.`, {
-        old: bot.i18n.__({ phrase: current || "none", locale: current }),
-        new: bot.i18n.__({ phrase: option, locale: current }),
-      }),
+      bot.i18n.__(
+        { phrase: `Changed the language from \`{{old}}\` to \`{{new}}\`. It may take a while for the change to be completed.`, locale },
+        {
+          old: bot.i18n.__({ phrase: current || "none", locale: current }),
+          new: bot.i18n.__({ phrase: option, locale: current }),
+        },
+      ),
     );
   },
 );
