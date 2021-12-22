@@ -8,5 +8,5 @@ import { bot } from "../main";
 
 bot.eventManager.register("guildCreate", (guild) => {
   // when the bot joins a new server he has to deploy his commands
-  bot.InteractionManager.deploy(guild.id);
+  bot.interactionManager.deploy(guild.id);
 });

@@ -9,7 +9,7 @@ import { bot } from "../main";
 export default bot.eventManager.register("ready", async () => {
   // the bot is ready => register and deploy the commands
   await require("../commands");
-  bot.InteractionManager.deploy();
+  bot.interactionManager.deploy();
 
   bot.client.user?.presence.set({ status: "online" });
 

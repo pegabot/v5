@@ -21,7 +21,7 @@ export class Bot {
   });
 
   eventManager = new EventManager(this);
-  InteractionManager = new InteractionManager(this);
+  interactionManager = new InteractionManager(this);
   ProcessEventManager = new ProcessEventManager(this);
 
   logger = createLogger({
