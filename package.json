@@ -1,23 +1,22 @@
 {
-  "name": "studip-people-searcher",
-  "description": "Discord Bot which searches for people on @uni-giessen's Stud.Ip for you",
+  "name": "v5",
+  "description": "The fifth version of @pegabot on Discord",
   "version": "x.y.z",
   "main": "build/main.js",
-  "author": "Nico Finkernagel <nico@gruselhaus.com>",
-  "license": "MIT",
+  "author": "The Pegabot authors",
+  "license": "AGPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gruselhaus/studip-people-searcher.git"
+    "url": "https://github.com/pegabot/v5.git"
   },
   "engines": {
     "node": ">=16.x"
   },
   "scripts": {
-    "test": "jest . --verbose",
+    "test": "jest . --verbose --passWithNoTests",
     "dev": "nodemon .  --signal SIGINT",
     "build": "rm -rf build; tsc",
     "start": "node .",
-    "start:dev": "node .",
     "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e .; sh ./scripts/injectHeader.sh",
     "actions": "act --rm"
   },
@@ -58,6 +57,6 @@
       "dist/*"
     ],
     "ext": "ts",
-    "exec": "yarn build --sourceMap; yarn start:dev"
+    "exec": "yarn build --sourceMap; yarn start"
   }
 }

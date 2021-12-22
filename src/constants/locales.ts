@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2021 Nico Finkernagel
- * This code is licensed under the MIT license
- * (see https://github.com/gruselhaus/studip-people-searcher/blob/main/LICENSE.md for details)
+ * Copyright (c) 2021 The Pegabot authors
+ * This code is licensed under GNU Affero General Public License v3.0
+ * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
 export const locales = ["en", "de"];
