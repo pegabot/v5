@@ -7,9 +7,9 @@
 import { bot } from "../main";
 
 export const setGuildLocale = async (guildID: string, locale: string): Promise<true> => {
-  return bot.keyv.set(`${guildID}-locale`, locale);
+  return bot.redis.set(`${guildID}-locale`, locale);
 };
 
 export const getGuildLocale = async (guildID: string): Promise<string> => {
-  return (await bot.keyv.get(`${guildID}-locale`)) || "en";
+  return (await bot.redis.get(`${guildID}-locale`)) || "en";
 };

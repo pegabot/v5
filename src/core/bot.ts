@@ -29,7 +29,7 @@ export class Bot {
     format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()),
   });
 
-  keyv = new Keyv(process.env.REDIS_URL, { namespace: `studip-searcher-${process.env.NODE_ENV}` });
+  redis = new Keyv(process.env.REDIS_URL, { namespace: `studip-searcher-${process.env.NODE_ENV}` });
   i18n = new I18n();
 
   constructor() {
