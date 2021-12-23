@@ -6,10 +6,14 @@
 
 import { bot } from "../main";
 
-export const setGuildLocale = async (guildID: string, locale: string): Promise<true> => {
+export const setGuildLocale = async (guildID: string, locale: string) => {
   return bot.redis.set(`${guildID}-locale`, locale);
 };
 
 export const getGuildLocale = async (guildID: string): Promise<string> => {
   return (await bot.redis.get(`${guildID}-locale`)) || "en";
+};
+
+export const deleteGuildLocale = async (guildID: string) => {
+  return await bot.redis.delete(`${guildID}-locale`);
 };

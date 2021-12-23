@@ -4,6 +4,10 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
+import "./events/debug";
+import "./events/error";
 import "./events/guildCreate";
+import "./events/guildDelete";
 import "./events/interactionCreate";
 import "./events/ready";
+import "./events/warn";
