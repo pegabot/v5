@@ -34,7 +34,6 @@ export class Bot {
 
   constructor() {
     this.ProcessEventManager.setupEvents();
-    // this.logger.add(new transports.Console({ format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()) }));
     this.i18n.configure({
       defaultLocale: "en",
       locales: locales,

@@ -18,14 +18,14 @@ export class InteractionManager {
   register(command: ApplicationCommandData, callback: (interaction: CommandInteraction, locale: string) => Promise<void>) {
     this.bot.logger.info(`registering command (${command.name})`);
 
-    //register the command
+    // register the command
     this.commands.push({ command, callback });
   }
 
   async deploy(guildID?: string): Promise<[void]> {
-    // if we have a guilID we want to the server with the id = guildID only
-    // then we get the guilds from cache first.
-    // If guilds are not present fetch from API.
+    // if we have a guilID we want to deploy to the server with the id = guildID only
+    // then we get the guild(s) from cache first.
+    // if guilds are not present in cache, fetch from API.
     let guilds: Guild[] | OAuth2Guild[] = [];
     if (guildID) {
       let guild = this.bot.client.guilds.cache.get(guildID);
@@ -54,7 +54,7 @@ export class InteractionManager {
       });
     });
 
-    //deploy the commands on all servers the bot is a member of
+    // deploy the commands on the server(s)
     return await Promise.all([
       guilds.forEach(async (guild) => {
         const locale = await getGuildLocale(guild.id);

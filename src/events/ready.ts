@@ -8,6 +8,7 @@ import { bot } from "../main";
 
 bot.EventManager.register("ready", async () => {
   // the bot is ready => register and deploy the commands
+  // on all servers the bot is a member of
   await require("../commands");
   bot.InteractionManager.deploy();
 

@@ -10,12 +10,12 @@ import { bot } from "../main";
 import { getGuildLocale } from "../utils/guildLocale";
 
 bot.EventManager.register("interactionCreate", async (interaction) => {
-  //Type Guard to ensure that interaction is a message command
+  // Type Guard to ensure that interaction is a message command
   if (interaction.isCommand()) {
-    // get the callback from the callback map and execute
-    const callback = bot.InteractionManager.commandCallbacks.get(interaction.commandName);
     const locale = await getGuildLocale(interaction.guildId);
 
+    // get the callback from the callback map and execute
+    const callback = bot.InteractionManager.commandCallbacks.get(interaction.commandName);
     if (!callback) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_NOT_FOUND, locale }));
 
     try {

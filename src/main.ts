@@ -14,7 +14,7 @@ config();
 export const bot = new Bot();
 
 (async () => {
-  // Load the event handlers
+  // load the event handlers
   require("./events");
 
   await bot.login();
