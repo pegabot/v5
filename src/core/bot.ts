@@ -29,7 +29,8 @@ export class Bot {
     format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()),
   });
 
-  redis = new Keyv(process.env.REDIS_URL, { namespace: `studip-searcher-${process.env.NODE_ENV}` });
+  // TODO: change the namespace once this becomes the new Pegabot
+  redis = new Keyv(process.env.REDIS_URL, { namespace: `v5-${process.env.NODE_ENV}` });
   i18n = new I18n();
 
   constructor() {
