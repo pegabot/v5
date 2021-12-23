@@ -4,6 +4,7 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
+import prettyMs from "pretty-ms";
 import { messages } from "../constants/messages";
 import { bot } from "../main";
 import { getGuildLocale } from "../utils/guildLocale";
@@ -18,8 +19,10 @@ bot.eventManager.register("interactionCreate", async (interaction) => {
     if (!callback) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_NOT_FOUND, locale }));
 
     try {
-      bot.logger.info(`${interaction.guild?.name} - ${locale} => executing (${interaction.commandName})`);
+      const started = Date.now();
       await callback(interaction, locale);
+      const ended = Date.now();
+      bot.logger.info(`${interaction.guild?.name} - ${locale} => executing (${interaction.commandName}) took ${prettyMs(ended - started)}`);
     } catch (e) {
       bot.logger.error(`Error ocurred during execution of (${interaction.commandName}) => ${e}`);
 
