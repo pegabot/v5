@@ -10,9 +10,9 @@ import Keyv from "keyv";
 import path from "path";
 import { createLogger, format, transports } from "winston";
 import { locales } from "../constants/locales";
-import { EventManager } from "./managers/eventManager";
-import { InteractionManager } from "./managers/interactionManager";
-import { ProcessEventManager } from "./managers/processEventManager";
+import { EventManager } from "./managers/EventManager";
+import { InteractionManager } from "./managers/InteractionManager";
+import { ProcessEventManager } from "./managers/ProcessEventManager";
 
 export class Bot {
   client = new Client({
@@ -20,9 +20,9 @@ export class Bot {
     partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
 
-  eventManager = new EventManager(this);
-  interactionManager = new InteractionManager(this);
-  processEventManager = new ProcessEventManager(this);
+  EventManager = new EventManager(this);
+  InteractionManager = new InteractionManager(this);
+  ProcessEventManager = new ProcessEventManager(this);
 
   logger = createLogger({
     transports: [new transports.Console({ level: "debug" })],
@@ -33,7 +33,7 @@ export class Bot {
   i18n = new I18n();
 
   constructor() {
-    this.processEventManager.setupEvents();
+    this.ProcessEventManager.setupEvents();
     // this.logger.add(new transports.Console({ format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()) }));
     this.i18n.configure({
       defaultLocale: "en",

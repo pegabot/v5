@@ -8,7 +8,7 @@ import { messages } from "../constants/messages";
 import { bot } from "../main";
 import { setGuildLocale } from "../utils/guildLocale";
 
-bot.interactionManager.register(
+bot.InteractionManager.register(
   {
     name: "language",
     description: "Set the language this bot uses on this server",
@@ -33,7 +33,7 @@ bot.interactionManager.register(
     if (current === option) return interaction.reply(bot.i18n.__({ phrase: "Hey, looks like everything will stay the same 🤣", locale: current }));
 
     await setGuildLocale(interaction.guildId, option);
-    bot.interactionManager.deploy(interaction.guild?.id as string);
+    bot.InteractionManager.deploy(interaction.guild?.id as string);
 
     await interaction.reply(
       bot.i18n.__(
