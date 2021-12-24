@@ -10,6 +10,7 @@ import { setGuildLocale } from "../utils/guildLocale";
 
 bot.InteractionManager.register(
   {
+    permissions: ["ADMINISTRATOR"],
     name: "language",
     description: "Set the language this bot uses on this server",
     type: "CHAT_INPUT",
