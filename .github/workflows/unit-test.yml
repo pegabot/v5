@@ -8,14 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Use Node.js "16.x"
         uses: actions/setup-node@v1
         with:
           node-version: "16.x"
+      
       - name: Install dependencies
         run: yarn install --prefer-offline
+      
       - name: Run test
         run: yarn test
+      
       - name: Run build
         run: yarn build
     env:
