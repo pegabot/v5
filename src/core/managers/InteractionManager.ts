@@ -61,8 +61,6 @@ export class InteractionManager {
         // the guild is not in the cache, fetching from API
         guilds = [await this.bot.client.guilds.fetch(guildID)];
       }
-
-      this.bot.logger.info(`deploying ${this.commands.size} commands on guild (${guilds[0].name})`);
     } else {
       // we want to deploy to all guilds we are a member of
       guilds = [...this.bot.client.guilds.cache.values()];
@@ -71,8 +69,6 @@ export class InteractionManager {
         // the guild is not in the cache, fetching from API
         guilds = [...(await this.bot.client.guilds.fetch()).values()];
       }
-
-      this.bot.logger.info(`deploying ${this.commands.size} commands on ${guilds.length} guild(s)`);
     }
 
     // we need to set a callback for every translation of the command name
@@ -92,7 +88,13 @@ export class InteractionManager {
 
           // transalate the data from all commands with the locale of the guild
           const data = this.localizeCommandData(
-            [...this.commands.values()].map(({ data }) => data),
+            [...this.commands.values()]
+              // we need to check if the command should be deployed to this guild
+              .filter((command) => {
+                if (!command.guildIDs || command.guildIDs.length < 1) return true;
+                return command.guildIDs && command.guildIDs.includes(guild.id);
+              })
+              .map(({ data }) => data),
             locale,
           );
 
@@ -102,6 +104,7 @@ export class InteractionManager {
             const command = this.commands.find((command) => command.alias?.includes(createdCommand.name) || false);
             if (!command) return;
             command.ids?.set(guild.id, createdCommand.id);
+            this.bot.logger.info(`deployed command (${createdCommand.name}) on guild (${guild.name})`);
           });
           resolve(true);
         });

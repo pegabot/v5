@@ -11,6 +11,7 @@ import { BotTask } from "./BotTask";
 
 export abstract class BotPlugin {
   abstract name: string;
+  guildIDs?: string[];
   events: BotEvent<keyof ClientEvents>[] = [];
   commands: BotCommand[] = [];
   tasks: BotTask[] = [];
@@ -23,7 +24,7 @@ export abstract class BotPlugin {
   }
 
   registerCommand(command: BotCommand) {
-    this.commands.push(command);
+    this.commands.push({ ...command, guildIDs: this.guildIDs });
   }
 
   registerTask(task: BotTask) {

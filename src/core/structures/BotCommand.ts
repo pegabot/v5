@@ -9,6 +9,7 @@ import { ApplicationCommandData, Collection, CommandInteraction, PermissionStrin
 export interface BotCommand {
   ids?: Collection<string, string>;
   alias?: string[];
+  guildIDs?: string[];
   data: ApplicationCommandData & { permissions?: PermissionString[] };
   callback: (interaction: CommandInteraction, locale: string) => Promise<any>;
 }
