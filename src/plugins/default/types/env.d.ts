@@ -6,6 +6,6 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    INVITE_LINK: string;
+    DEFAULT_INVITE_LINK: string;
   }
 }

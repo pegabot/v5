@@ -20,7 +20,7 @@ Default.registerCommand({
       new MessageButton()
         .setLabel(bot.i18n.__({ phrase: "Invite this bot", locale }))
         .setStyle("LINK")
-        .setURL(process.env.INVITE_LINK),
+        .setURL(process.env.DEFAULT_INVITE_LINK),
     );
 
     interaction.reply({ content: bot.i18n.__({ phrase: "Here you go 🎉", locale }), components: [row] });

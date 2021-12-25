@@ -15,10 +15,10 @@ export abstract class BotPlugin {
   commands: BotCommand[] = [];
   tasks: BotTask[] = [];
 
-  registerEvent<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => any) {
+  registerEvent<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => Promise<any> | any) {
     this.events.push({
       name,
-      callback,
+      callback: callback as any,
     });
   }
 

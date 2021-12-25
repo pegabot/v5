@@ -6,5 +6,5 @@ This plugin needs an environmental variable:
 
 Add this to your runtime envs and to the `.env` file in the root of this repository for development:
 ```
-INVITE_LINK=<add the invite link for your bot here>
+DEFAULT_INVITE_LINK=<add the invite link for your bot here>
 ```
