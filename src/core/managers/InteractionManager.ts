@@ -42,7 +42,7 @@ export class InteractionManager {
   }
 
   async deploy(guildID?: string) {
-    // if we have a guilID we want to deploy to this guild ony
+    // if we have a guilID we want to deploy to this guild only
     // then we try to get the guild(s) from cache first.
     // if guilds are not present in cache, fetch from API.
     let guilds: Guild[] | OAuth2Guild[] = [];
