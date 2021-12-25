@@ -9,7 +9,7 @@ import Default from "../plugin";
 
 Default.registerTask({
   name: "join thread channels",
-  interval: 1000,
+  interval: 5000,
   callback: async () => {
     (await bot.client.guilds.fetch()).forEach(async (guild) => {
       (await guild?.fetch())?.channels.cache.forEach(async (channel) => {
