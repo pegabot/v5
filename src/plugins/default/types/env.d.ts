@@ -6,8 +6,6 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    NODE_ENV: string;
-    REDIS_URL: string;
-    BOT_TOKEN: string;
+    INVITE_LINK: string;
   }
 }

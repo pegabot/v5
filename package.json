@@ -17,7 +17,6 @@
     "dev": "nodemon .  --signal SIGINT",
     "build": "rm -rf build; tsc",
     "start": "node .",
-    "generateEnvTypes": "npx gen-env-types .env -o src/types/env.d.ts -e .; sh ./scripts/injectHeader.sh",
     "actions": "act --rm"
   },
   "dependencies": {
