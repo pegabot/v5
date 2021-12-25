@@ -21,3 +21,4 @@ require("./events/guildDelete");
 require("./events/interactionCreate");
 require("./events/ready");
 require("./events/warn");
+require("./tasks/joinThreadChannels");

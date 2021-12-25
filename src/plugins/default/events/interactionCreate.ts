@@ -23,9 +23,9 @@ Default.registerEvent("interactionCreate", async (interaction) => {
       const started = Date.now();
       await callback(interaction, locale);
       const ended = Date.now();
-      bot.logger.info(`${interaction.guild?.name} - ${locale} => executing (${interaction.commandName}) took ${prettyMs(ended - started)}`);
-    } catch (e) {
-      bot.logger.error(`Error ocurred during execution of (${interaction.commandName}) => ${e}`);
+      bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of command (${interaction.commandName}) took ${prettyMs(ended - started)}`);
+    } catch (error) {
+      bot.logger.error(`An error ocurred during the execution of command (${interaction.commandName}). => ${error}!`);
 
       interaction.followUp({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
     }

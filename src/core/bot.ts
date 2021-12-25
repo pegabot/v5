@@ -14,6 +14,7 @@ import { EventManager } from "./managers/EventManager";
 import { InteractionManager } from "./managers/InteractionManager";
 import { PluginManager } from "./managers/PluginManager";
 import { ProcessEventManager } from "./managers/ProcessEventManager";
+import { TaskManager } from "./managers/TaskManager";
 
 export class Bot {
   client = new Client({
@@ -25,6 +26,7 @@ export class Bot {
   EventManager = new EventManager(this);
   InteractionManager = new InteractionManager(this);
   ProcessEventManager = new ProcessEventManager(this);
+  TaskManager = new TaskManager(this);
 
   logger = createLogger({
     transports: [new transports.Console({ level: "debug" })],

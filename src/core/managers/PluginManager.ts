@@ -34,8 +34,8 @@ export class PluginManager {
   }
 
   private registerModules() {
-    // this function registers the events
-    // and commands of the loaded plugins
+    // this function registers the events,
+    // commands and tasks of the loaded plugins
     for (const plugin of this.plugins) {
       if (plugin.events.length > 0) {
         for (const event of plugin.events) {
@@ -46,6 +46,12 @@ export class PluginManager {
       if (plugin.commands.length > 0) {
         for (const command of plugin.commands) {
           this.bot.InteractionManager.register(command);
+        }
+      }
+
+      if (plugin.tasks.length > 0) {
+        for (const task of plugin.tasks) {
+          this.bot.TaskManager.register(task);
         }
       }
     }

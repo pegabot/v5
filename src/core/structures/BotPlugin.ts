@@ -7,11 +7,13 @@
 import { ClientEvents } from "discord.js";
 import { BotCommand } from "./BotCommand";
 import { BotEvent } from "./BotEvent";
+import { BotTask } from "./BotTask";
 
 export abstract class BotPlugin {
   abstract name: string;
   events: BotEvent<keyof ClientEvents>[] = [];
   commands: BotCommand[] = [];
+  tasks: BotTask[] = [];
 
   registerEvent<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => any) {
     this.events.push({
@@ -22,5 +24,9 @@ export abstract class BotPlugin {
 
   registerCommand(command: BotCommand) {
     this.commands.push(command);
+  }
+
+  registerTask(task: BotTask) {
+    this.tasks.push(task);
   }
 }
