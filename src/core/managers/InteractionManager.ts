@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021 The Pegabot authors
  * This code is licensed under GNU Affero General Public License v3.0
- * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
+ * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
 import {
@@ -12,7 +12,7 @@ import {
   Collection,
   Guild,
   GuildApplicationCommandPermissionData,
-  OAuth2Guild,
+  OAuth2Guild
 } from "discord.js";
 import { getRolesByPermissionsAndGuild } from "../../utils/getRolesByPermissionsAndGuild";
 import { getGuildLocale } from "../../utils/guildLocale";
@@ -159,7 +159,7 @@ export class InteractionManager {
   }
 
   private localizeCommandData(data: ApplicationCommandData[], locale: string): ApplicationCommandData[] {
-    // this function takes the command data that will be send via API and translate all the text fields
+    // this function takes the command data that will be send via API and translates all the text fields
     // the user will see
     const localized: ApplicationCommandData[] = data.map((d) => {
       return {
