@@ -4,13 +4,14 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
+import { Collection } from "discord.js";
 import { glob } from "glob";
 import path from "path";
 import { Bot } from "../bot";
 import { BotPlugin } from "../structures/BotPlugin";
 
 export class PluginManager {
-  plugins: BotPlugin[] = [];
+  plugins: Collection<string, BotPlugin> = new Collection();
   constructor(private bot: Bot) {}
 
   async setup(): Promise<any> {
@@ -25,7 +26,13 @@ export class PluginManager {
       glob(path.resolve(__dirname, "./../../plugins/**/plugin.js"), async (error, files) => {
         for (const file of files) {
           const plugin: BotPlugin = await require(file).default;
-          this.plugins.push(plugin);
+
+          if (this.plugins.has(plugin.name)) {
+            this.bot.logger.info(`Plugin (${plugin.name}) exists already.`);
+            continue;
+          }
+
+          this.plugins.set(plugin.name, plugin);
           this.bot.logger.info(`loading plugin (${plugin.name})`);
         }
         resolve(true);
@@ -36,7 +43,7 @@ export class PluginManager {
   private registerModules() {
     // this function registers the events,
     // commands and tasks of the loaded plugins
-    for (const plugin of this.plugins) {
+    for (const plugin of [...this.plugins.values()]) {
       if (plugin.events.length > 0) {
         for (const event of plugin.events) {
           this.bot.EventManager.register(event);
