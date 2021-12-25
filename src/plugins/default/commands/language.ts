@@ -4,11 +4,12 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { messages } from "../constants/messages";
-import { bot } from "../main";
-import { setGuildLocale } from "../utils/guildLocale";
+import { messages } from "../../../constants/messages";
+import { bot } from "../../../main";
+import { setGuildLocale } from "../../../utils/guildLocale";
+import Default from "../plugin";
 
-bot.InteractionManager.register({
+Default.registerCommand({
   data: {
     permissions: ["ADMINISTRATOR"],
     name: "language",

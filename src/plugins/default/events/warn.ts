@@ -4,5 +4,7 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import "./commands/invite";
-import "./commands/language";
+import { bot } from "../../../main";
+import Default from "../plugin";
+
+Default.registerEvent("warn", (message) => bot.logger.warn(message));

@@ -12,6 +12,7 @@ import { createLogger, format, transports } from "winston";
 import { locales } from "../constants/locales";
 import { EventManager } from "./managers/EventManager";
 import { InteractionManager } from "./managers/InteractionManager";
+import { PluginManager } from "./managers/PluginManager";
 import { ProcessEventManager } from "./managers/ProcessEventManager";
 
 export class Bot {
@@ -20,6 +21,7 @@ export class Bot {
     partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
 
+  PluginManager = new PluginManager(this);
   EventManager = new EventManager(this);
   InteractionManager = new InteractionManager(this);
   ProcessEventManager = new ProcessEventManager(this);

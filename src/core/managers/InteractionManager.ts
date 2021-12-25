@@ -12,7 +12,7 @@ import {
   Collection,
   Guild,
   GuildApplicationCommandPermissionData,
-  OAuth2Guild
+  OAuth2Guild,
 } from "discord.js";
 import { getRolesByPermissionsAndGuild } from "../../utils/getRolesByPermissionsAndGuild";
 import { getGuildLocale } from "../../utils/guildLocale";
@@ -41,7 +41,7 @@ export class InteractionManager {
     this.commands.set(command.data.name, command);
   }
 
-  async deploy(guildID?: string) {
+  async deploy(guildID?: string): Promise<any> {
     // if we have a guilID we want to deploy to this guild only
     // then we try to get the guild(s) from cache first.
     // if guilds are not present in cache, fetch from API.
@@ -109,7 +109,7 @@ export class InteractionManager {
     return this.deployPermissions(guilds as Guild[]);
   }
 
-  private async deployPermissions(guilds: Guild[]): Promise<void> {
+  private async deployPermissions(guilds: Guild[]): Promise<any> {
     // we have to deploy the permissions for every guild separately because
     // we only use guild specific commands
     guilds.forEach(async (guild) => {

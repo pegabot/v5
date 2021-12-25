@@ -4,6 +4,9 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { bot } from "../main";
+import { ClientEvents } from "discord.js";
 
-bot.EventManager.register("debug", (message) => bot.logger.debug(message));
+export interface BotEvent<K extends keyof ClientEvents> {
+  name: K;
+  callback: any;
+}

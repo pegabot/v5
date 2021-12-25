@@ -24,6 +24,7 @@
     "@keyv/redis": "^2.2.1",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
+    "glob": "^7.2.0",
     "i18n": "^0.13.3",
     "keyv": "^4.0.4",
     "pretty-ms": "^7.0.1",
@@ -31,6 +32,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/glob": "^7.2.0",
     "@types/i18n": "^0.13.2",
     "@types/jest": "^27.0.3",
     "@types/keyv": "^3.1.3",

@@ -4,6 +4,9 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { bot } from "../main";
+import { bot } from "../../../main";
+import Default from "../plugin";
 
-bot.EventManager.register("error", (message) => bot.logger.error(message));
+Default.registerEvent("debug", (message) => {
+  bot.logger.debug(message);
+});

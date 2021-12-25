@@ -14,8 +14,7 @@ config();
 export const bot = new Bot();
 
 (async () => {
-  // load the event handlers
-  require("./events");
-
+  // load and setup all plugins
+  await bot.PluginManager.setup();
   await bot.login();
 })();

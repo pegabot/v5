@@ -5,11 +5,12 @@
  */
 
 import prettyMs from "pretty-ms";
-import { messages } from "../constants/messages";
-import { bot } from "../main";
-import { getGuildLocale } from "../utils/guildLocale";
+import { messages } from "../../../constants/messages";
+import { bot } from "../../../main";
+import { getGuildLocale } from "../../../utils/guildLocale";
+import Default from "../plugin";
 
-bot.EventManager.register("interactionCreate", async (interaction) => {
+Default.registerEvent("interactionCreate", async (interaction) => {
   // Type Guard to ensure that interaction is a message command
   if (interaction.isCommand()) {
     const locale = await getGuildLocale(interaction.guildId);

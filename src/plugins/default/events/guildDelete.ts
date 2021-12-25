@@ -4,10 +4,10 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { bot } from "../main";
-import { deleteGuildLocale } from "../utils/guildLocale";
+import { deleteGuildLocale } from "../../../utils/guildLocale";
+import Default from "../plugin";
 
-bot.EventManager.register("guildDelete", (guild) => {
+Default.registerEvent("guildDelete", (guild) => {
   // when the bot leaves a guild he needs to delete all configs related to this guild
   deleteGuildLocale(guild.id);
 });

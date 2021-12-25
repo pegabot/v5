@@ -5,9 +5,10 @@
  */
 
 import { MessageActionRow, MessageButton } from "discord.js";
-import { bot } from "../main";
+import { bot } from "../../../main";
+import Default from "../plugin";
 
-bot.InteractionManager.register({
+Default.registerCommand({
   data: {
     permissions: ["ADMINISTRATOR"],
     name: "invite",

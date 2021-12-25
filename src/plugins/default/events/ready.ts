@@ -4,12 +4,12 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { bot } from "../main";
+import { bot } from "../../../main";
+import Default from "../plugin";
 
-bot.EventManager.register("ready", async () => {
-  // the bot is ready => register and deploy the commands
+Default.registerEvent("ready", async () => {
+  // the bot is ready => deploy the commands
   // on all servers the bot is a member of
-  await require("../commands");
   bot.InteractionManager.deploy();
 
   bot.client.user?.presence.set({ status: "online" });

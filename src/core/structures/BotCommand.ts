@@ -10,5 +10,5 @@ export interface BotCommand {
   ids?: Collection<string, string>;
   alias?: string[];
   data: ApplicationCommandData & { permissions?: PermissionString[] };
-  callback: (interaction: CommandInteraction, locale: string) => Promise<void>;
+  callback: (interaction: CommandInteraction, locale: string) => Promise<any>;
 }
