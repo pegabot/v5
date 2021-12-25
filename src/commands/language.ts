@@ -8,8 +8,8 @@ import { messages } from "../constants/messages";
 import { bot } from "../main";
 import { setGuildLocale } from "../utils/guildLocale";
 
-bot.InteractionManager.register(
-  {
+bot.InteractionManager.register({
+  data: {
     permissions: ["ADMINISTRATOR"],
     name: "language",
     description: "Set the language this bot uses on this server",
@@ -27,7 +27,7 @@ bot.InteractionManager.register(
       },
     ],
   },
-  async (interaction, current) => {
+  callback: async (interaction, current) => {
     const option = interaction.options.getString(bot.i18n.__({ phrase: "language", locale: current }));
     if (!option) return interaction.reply(bot.i18n.__(messages.COMMAND_TRY_AGAIN));
 
@@ -38,12 +38,12 @@ bot.InteractionManager.register(
 
     await interaction.reply(
       bot.i18n.__(
-        { phrase: `Changed the language from \`{{old}}\` to \`{{new}}\`. It may take a while for the change to be completed.`, locale: current },
+        { phrase: `Changed the language from \`{{old}}\` to \`{{new}}\`. It may take a while for the change to be completed.`, locale: option },
         {
-          old: bot.i18n.__({ phrase: current || "none", locale: current }),
-          new: bot.i18n.__({ phrase: option, locale: current }),
+          old: bot.i18n.__({ phrase: current || "none", locale: option }),
+          new: bot.i18n.__({ phrase: option, locale: option }),
         },
       ),
     );
   },
-);
+});

@@ -7,6 +7,7 @@
 import { Guild, PermissionString, Role } from "discord.js";
 
 export const getRolesByPermissionsAndGuild = (guild: Guild, permissions: PermissionString[]): Role[] => {
+  // this function returns all roles of a given guild which has a permission defined in `permissions`
   return [
     ...guild.roles.cache
       .filter((role) => {

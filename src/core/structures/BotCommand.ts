@@ -4,10 +4,11 @@
  * (see https://github.com/pegabot/discord/blob/main/LICENSE for details)
  */
 
-import { ApplicationCommandData, CommandInteraction, PermissionString } from "discord.js";
+import { ApplicationCommandData, Collection, CommandInteraction, PermissionString } from "discord.js";
 
 export interface BotCommand {
-  id?: string;
-  command: ApplicationCommandData & { permissions?: PermissionString[] };
+  ids?: Collection<string, string>;
+  alias?: string[];
+  data: ApplicationCommandData & { permissions?: PermissionString[] };
   callback: (interaction: CommandInteraction, locale: string) => Promise<void>;
 }
