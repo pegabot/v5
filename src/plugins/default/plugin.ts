@@ -7,7 +7,7 @@
 import { BotPlugin } from "../../core/structures/BotPlugin";
 
 class Plugin extends BotPlugin {
-  name = "default";
+  name = "Default";
 }
 
 export default new Plugin();

@@ -17,5 +17,7 @@
 	"The corresponding command was not found": "The corresponding command was not found",
 	"The user couldn't be found!": "The user couldn't be found!",
 	"Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed.": "Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed.",
-	"An error ocurred, pleasy try again later!": "An error ocurred, pleasy try again later!"
+	"An error ocurred, pleasy try again later!": "An error ocurred, pleasy try again later!",
+	"ping": "ping",
+	"Ping Pong 🏓": "Ping Pong 🏓"
 }
