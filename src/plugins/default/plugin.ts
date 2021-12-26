@@ -8,6 +8,7 @@ import { BotPlugin } from "../../core/structures/BotPlugin";
 
 class Plugin extends BotPlugin {
   name = "Default";
+  store = this.getDatastore();
 }
 
 export default new Plugin();

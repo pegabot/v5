@@ -15,7 +15,7 @@ import {
   OAuth2Guild,
 } from "discord.js";
 import { getRolesByPermissionsAndGuild } from "../../utils/getRolesByPermissionsAndGuild";
-import { getGuildLocale } from "../../utils/guildLocale";
+import { getGuildLocale } from "../../plugins/default/utils/guildLocale";
 import { Bot } from "../bot";
 import { BotCommand } from "../structures/BotCommand";
 

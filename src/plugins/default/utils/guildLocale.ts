@@ -4,16 +4,16 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { bot } from "../main";
+import Default from "../plugin";
 
 export const setGuildLocale = async (guildID: string, locale: string) => {
-  return bot.redis.set(`${guildID}-locale`, locale);
+  return Default.store.set(`${guildID}-locale`, locale);
 };
 
 export const getGuildLocale = async (guildID: string): Promise<string> => {
-  return (await bot.redis.get(`${guildID}-locale`)) || "en";
+  return (await Default.store.get(`${guildID}-locale`)) || "en";
 };
 
 export const deleteGuildLocale = async (guildID: string) => {
-  return await bot.redis.delete(`${guildID}-locale`);
+  return await Default.store.delete(`${guildID}-locale`);
 };

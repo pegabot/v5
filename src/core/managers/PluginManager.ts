@@ -43,6 +43,12 @@ export class PluginManager {
   private registerModules() {
     // this function registers the events,
     // commands and tasks of the loaded plugins
+
+    if (!this.plugins.get("Default")) {
+      this.bot.logger.error("The plugin (Default) is not available but required for correct functionality. Exiting.");
+      this.bot.ProcessEventManager.destroy();
+    }
+
     for (const plugin of [...this.plugins.values()]) {
       if (plugin.events.length > 0) {
         for (const event of plugin.events) {

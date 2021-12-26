@@ -5,9 +5,14 @@
  */
 
 import { ClientEvents } from "discord.js";
+import { config } from "dotenv";
+import Keyv from "keyv";
+import { bot } from "../../main";
 import { BotCommand } from "./BotCommand";
 import { BotEvent } from "./BotEvent";
 import { BotTask } from "./BotTask";
+
+config();
 
 export abstract class BotPlugin {
   abstract name: string;
@@ -15,6 +20,16 @@ export abstract class BotPlugin {
   events: BotEvent<keyof ClientEvents>[] = [];
   commands: BotCommand[] = [];
   tasks: BotTask[] = [];
+
+  getDatastore() {
+    const store = new Keyv(process.env.REDIS_URL, { namespace: `plugin-${this.name}-${process.env.NODE_ENV}` });
+
+    store.on("error", (error) => {
+      bot.logger.error(`The datastore of plugin (${this.name}) throw an error => ${error}`);
+    });
+
+    return store;
+  }
 
   registerEvent<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => Promise<any> | any) {
     this.events.push({

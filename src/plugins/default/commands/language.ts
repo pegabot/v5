@@ -6,7 +6,7 @@
 
 import { messages } from "../../../constants/messages";
 import { bot } from "../../../main";
-import { setGuildLocale } from "../../../utils/guildLocale";
+import { setGuildLocale } from "../utils/guildLocale";
 import Default from "../plugin";
 
 Default.registerCommand({

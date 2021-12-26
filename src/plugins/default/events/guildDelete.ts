@@ -4,7 +4,7 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { deleteGuildLocale } from "../../../utils/guildLocale";
+import { deleteGuildLocale } from "../utils/guildLocale";
 import Default from "../plugin";
 
 Default.registerEvent("guildDelete", (guild) => {

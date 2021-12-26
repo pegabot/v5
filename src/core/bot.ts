@@ -6,7 +6,6 @@
 
 import { Client, Intents } from "discord.js";
 import { I18n } from "i18n";
-import Keyv from "keyv";
 import path from "path";
 import { createLogger, format, transports } from "winston";
 import { EventManager } from "./managers/EventManager";
@@ -32,8 +31,6 @@ export class Bot {
     format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()),
   });
 
-  // TODO: change the namespace once this becomes the new Pegabot
-  redis = new Keyv(process.env.REDIS_URL, { namespace: `v5-${process.env.NODE_ENV}` });
   i18n = new I18n();
 
   constructor() {

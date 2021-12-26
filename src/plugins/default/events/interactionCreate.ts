@@ -7,7 +7,7 @@
 import prettyMs from "pretty-ms";
 import { messages } from "../../../constants/messages";
 import { bot } from "../../../main";
-import { getGuildLocale } from "../../../utils/guildLocale";
+import { getGuildLocale } from "../utils/guildLocale";
 import Default from "../plugin";
 
 Default.registerEvent("interactionCreate", async (interaction) => {
