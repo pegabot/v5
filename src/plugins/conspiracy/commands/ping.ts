@@ -10,7 +10,6 @@ CONspiracy.registerCommand({
   data: {
     name: "ping",
     description: "Ping Pong 🏓",
-    permissions: ["ADMINISTRATOR"],
   },
   callback: (interaction) => {
     interaction.reply({ content: "Pong 🏓", ephemeral: true });
