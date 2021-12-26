@@ -6,6 +6,30 @@
           "name": "ping",
           "description": "Ping Pong 🏓",
           "response": "Pong 🏓"
+        },
+        "name": {
+          "name": "name",
+          "description": "Create your own character name.",
+          "option": {
+            "language": {
+              "name": "language",
+              "description": "What language do you want your name to be?",
+              "choice": {
+                "de": "German",
+                "en": "English",
+                "ww": "Winterwald"
+              }
+            },
+            "gender": {
+              "name": "gender",
+              "description": "What gender do you want your name to be?",
+              "choice": {
+                "male": "Male",
+                "female": "Female"
+              }
+            }
+          },
+          "response": "Your randomly generated name is: `{{name}}` 🎉"
         }
       }
     },
@@ -15,15 +39,15 @@
           "name": "invite",
           "description": "Invite this bot to your server!",
           "response": "Here you go 🎉",
-          "buttonText": "Invite this bot"
+          "buttonText": "Invite me!"
         },
         "language": {
           "name": "language",
-          "description": "Set the language this bot uses on this server",
+          "description": "Set the language this bot uses on this server.",
           "option": {
             "language": {
               "name": "language",
-              "description": "Choose a language for this server",
+              "description": "Choose a language for this server.",
               "choice": {
                 "de": "German",
                 "en": "English"
@@ -44,8 +68,8 @@
   "constants": {
     "messages": {
       "COMMAND_INTERNAL_ERROR": "An error ocurred, pleasy try again later!",
-      "COMMAND_NOT_FOUND": "The user couldn't be found!",
-      "COMMAND_USER_NOT_FOUND": "constants.messages.COMMAND_USER_NOT_FOUND",
+      "COMMAND_NOT_FOUND": "The requested command couldn't be found!",
+      "COMMAND_USER_NOT_FOUND": "The user couldn't be found!",
       "COMMAND_TRY_AGAIN": "I'm working right now, pleasy try again shortly!"
     }
   }

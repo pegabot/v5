@@ -40,7 +40,6 @@ export class Bot {
       locales: ["de", "en"],
       objectNotation: true,
       directory: path.join(__dirname, "/../../i18n/locales"),
-      syncFiles: true,
       autoReload: true,
       updateFiles: false,
     });

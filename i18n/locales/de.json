@@ -6,6 +6,30 @@
           "name": "ping",
           "description": "Ping Pong 🏓",
           "response": "Pong 🏓"
+        },
+        "name": {
+          "name": "name",
+          "description": "Generiere deinen eigenen Charakternamen.",
+          "option": {
+            "language": {
+              "name": "sprache",
+              "description": "Welche Sprache soll dein Name erhalten?",
+              "choice": {
+                "de": "Deutsch",
+                "en": "Englisch",
+                "ww": "Winterwald"
+              }
+            },
+            "gender": {
+              "name": "geschlecht",
+              "description": "Welches Geschlecht soll dein Name erhalten?",
+              "choice": {
+                "male": "Männlich",
+                "female": "Weiblich"
+              }
+            }
+          },
+          "response": "Dein zufällig generierter Name lautet: `{{name}}` 🎉"
         }
       }
     },
@@ -15,7 +39,7 @@
           "name": "einladung",
           "description": "Lade diesen Bot auf deinen Server ein!",
           "response": "Bitteschön 🎉",
-          "buttonText": "Lade mich ein"
+          "buttonText": "Lade mich ein!"
         },
         "language": {
           "name": "sprache",
@@ -23,7 +47,7 @@
           "option": {
             "language": {
               "name": "sprache",
-              "description": "Wähle eine Sprache für diesen Server",
+              "description": "Wähle eine Sprache für diesen Server.",
               "choice": {
                 "de": "Deutsch",
                 "en": "Englisch"
@@ -44,7 +68,7 @@
   "constants": {
     "messages": {
       "COMMAND_INTERNAL_ERROR": "Ein Fehler ist aufgetreten, bitte versuche es später erneut!",
-      "COMMAND_NOT_FOUND": "Der zugehörige Command wurde nicht gefunden",
+      "COMMAND_NOT_FOUND": "Der zugehörige Command wurde nicht gefunden!",
       "COMMAND_USER_NOT_FOUND": "Der User konnte nicht gefunden werden!",
       "COMMAND_TRY_AGAIN": "Ich arbeite gerade, bitte versuche es in Kürze erneut!"
     }

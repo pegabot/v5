@@ -7,8 +7,8 @@
 import prettyMs from "pretty-ms";
 import { messages } from "../../../constants/messages";
 import { bot } from "../../../main";
-import { getGuildLocale } from "../utils/guildLocale";
 import Default from "../plugin";
+import { getGuildLocale } from "../utils/guildLocale";
 
 Default.registerEvent("interactionCreate", async (interaction) => {
   // Type Guard to ensure that interaction is a message command
@@ -27,7 +27,9 @@ Default.registerEvent("interactionCreate", async (interaction) => {
     } catch (error) {
       bot.logger.error(`An error ocurred during the execution of command (${interaction.commandName}). => ${error}!`);
 
-      interaction.followUp({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
+      interaction.deferred
+        ? interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }))
+        : interaction.reply({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
     }
   }
 });

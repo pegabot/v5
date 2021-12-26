@@ -16,7 +16,6 @@ i18n.configure({
   objectNotation: true,
   directory: path.join(__dirname, "../../i18n/locales"),
   syncFiles: true,
-  autoReload: true,
 });
 
 const processData = () => {

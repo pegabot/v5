@@ -13,4 +13,5 @@ class CONspiracy extends BotPlugin {
 
 export default new CONspiracy();
 
+require("./commands/name");
 require("./commands/ping");
