@@ -42,7 +42,7 @@ export class Bot {
       defaultLocale: "en",
       locales: ["de", "en"],
       objectNotation: true,
-      directory: path.join(__dirname, "/../../locales"),
+      directory: path.join(__dirname, "/../../i18n/locales"),
       syncFiles: true,
       autoReload: true,
       updateFiles: false,

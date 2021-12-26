@@ -14,7 +14,7 @@ i18n.configure({
   defaultLocale: "en",
   locales: ["en", "de"],
   objectNotation: true,
-  directory: path.join(__dirname, "../../locales"),
+  directory: path.join(__dirname, "../../i18n/locales"),
   syncFiles: true,
   autoReload: true,
 });
