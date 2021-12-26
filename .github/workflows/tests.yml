@@ -1,0 +1,73 @@
+name: Tests
+on:
+  push:
+
+jobs:
+  test:
+    name: "Build Test"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Use Node.js "16.x"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      
+      - name: Install dependencies
+        run: yarn install --prefer-offline
+          
+      - name: Run build
+        run: yarn build
+  jest:
+    name: "Jest"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Use Node.js "16.x"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      
+      - name: Install dependencies
+        run: yarn install --prefer-offline
+          
+      - name: Run jest
+        run: yarn test
+  i18n:
+    name: "Validating i18n data"
+    runs-on: ubuntu-latest
+    steps:
+          - uses: actions/checkout@v2
+            with:
+             fetch-depth: '0'
+
+          - uses: actions/cache@v2
+            with:
+              path: '**/node_modules'
+              key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          
+          - name: Use Node.js "16.x"
+            uses: actions/setup-node@v1
+            with:
+              node-version: "16.x"
+          
+          - name: Install dependencies
+            run: yarn install --prefer-offline
+          
+          - name: Generating i18n data
+            run: yarn i18n
+          
+          - name: Checking if data has changed
+            run: sh ./scripts/i18n/action.sh
