@@ -9,7 +9,6 @@ import { I18n } from "i18n";
 import Keyv from "keyv";
 import path from "path";
 import { createLogger, format, transports } from "winston";
-import { locales } from "../constants/locales";
 import { EventManager } from "./managers/EventManager";
 import { InteractionManager } from "./managers/InteractionManager";
 import { PluginManager } from "./managers/PluginManager";
@@ -41,8 +40,12 @@ export class Bot {
     this.ProcessEventManager.setupEvents();
     this.i18n.configure({
       defaultLocale: "en",
-      locales: locales,
+      locales: ["de", "en"],
+      objectNotation: true,
       directory: path.join(__dirname, "/../../locales"),
+      syncFiles: true,
+      autoReload: true,
+      updateFiles: false,
     });
   }
 

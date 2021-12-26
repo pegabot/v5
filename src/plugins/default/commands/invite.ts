@@ -11,18 +11,22 @@ import Default from "../plugin";
 Default.registerCommand({
   data: {
     permissions: ["ADMINISTRATOR"],
-    name: "invite",
-    description: "Invite this bot to your server!",
+    // generateTranslation "plugin.default.command.invite.name"
+    name: "plugin.default.command.invite.name",
+    // generateTranslation "plugin.default.command.invite.description"
+    description: "plugin.default.command.invite.description",
     type: "CHAT_INPUT",
   },
   callback: async (interaction, locale) => {
     const row = new MessageActionRow().addComponents(
       new MessageButton()
-        .setLabel(bot.i18n.__({ phrase: "Invite this bot", locale }))
+        // generateTranslation "plugin.default.command.invite.buttonText"
+        .setLabel(bot.i18n.__({ phrase: "plugin.default.command.invite.buttonText", locale }))
         .setStyle("LINK")
         .setURL(process.env.DEFAULT_INVITE_LINK),
     );
 
-    interaction.reply({ content: bot.i18n.__({ phrase: "Here you go 🎉", locale }), components: [row] });
+    // generateTranslation "plugin.default.command.invite.response"
+    interaction.reply({ content: bot.i18n.__({ phrase: "plugin.default.command.invite.response", locale }), components: [row] });
   },
 });

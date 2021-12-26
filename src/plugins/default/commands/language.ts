@@ -12,37 +12,49 @@ import Default from "../plugin";
 Default.registerCommand({
   data: {
     permissions: ["ADMINISTRATOR"],
-    name: "language",
-    description: "Set the language this bot uses on this server",
+    // generateTranslation "plugin.default.command.language.name"
+    name: "plugin.default.command.language.name",
+    // generateTranslation "plugin.default.command.language.description"
+    description: "plugin.default.command.language.description",
     type: "CHAT_INPUT",
     options: [
       {
         required: true,
-        name: "language",
+        // generateTranslation "plugin.default.command.language.option.language.name"
+        name: "plugin.default.command.language.option.language.name",
         type: "STRING",
-        description: "Choose a language for this server",
+        // generateTranslation "plugin.default.command.language.option.language.description"
+        description: "plugin.default.command.language.option.language.description",
         choices: [
-          { name: "German", value: "de" },
-          { name: "English", value: "en" },
+          // generateTranslation "plugin.default.command.language.option.language.choice.de"
+          { name: "plugin.default.command.language.option.language.choice.de", value: "de" },
+          // generateTranslation "plugin.default.command.language.option.language.choice.en"
+          { name: "plugin.default.command.language.option.language.choice.en", value: "en" },
         ],
       },
     ],
   },
   callback: async (interaction, current) => {
-    const option = interaction.options.getString(bot.i18n.__({ phrase: "language", locale: current }));
+    // generateTranslation "plugin.default.command.language.option.language.name"
+    const option = interaction.options.getString(bot.i18n.__({ phrase: "plugin.default.command.language.option.language.name", locale: current }));
     if (!option) return interaction.reply(bot.i18n.__(messages.COMMAND_TRY_AGAIN));
 
-    if (current === option) return interaction.reply(bot.i18n.__({ phrase: "Hey, looks like everything will stay the same 🤣", locale: current }));
+    // generateTranslation "plugin.default.command.language.same"
+    if (current === option) return interaction.reply(bot.i18n.__({ phrase: "plugin.default.command.language.same", locale: current }));
 
     await setGuildLocale(interaction.guildId, option);
     bot.InteractionManager.deploy(interaction.guild?.id as string);
 
     await interaction.reply(
       bot.i18n.__(
-        { phrase: `Changed the language from \`{{old}}\` to \`{{new}}\`. It may take a while for the change to be completed.`, locale: option },
+        // generateTranslation "plugin.default.command.language.response"
+        { phrase: "plugin.default.command.language.response", locale: option },
         {
-          old: bot.i18n.__({ phrase: current || "none", locale: option }),
-          new: bot.i18n.__({ phrase: option, locale: option }),
+          // generateTranslation "plugin.default.command.language.locale.de"
+          // generateTranslation "plugin.default.command.language.locale.en"
+          // generateTranslation "plugin.default.command.language.locale.none"
+          old: bot.i18n.__({ phrase: `plugin.default.command.language.locale.${current || "none"}`, locale: option }),
+          new: bot.i18n.__({ phrase: `plugin.default.command.language.locale.${option}`, locale: option }),
         },
       ),
     );

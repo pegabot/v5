@@ -17,6 +17,7 @@
     "dev": "nodemon .  --signal SIGINT",
     "build": "rm -rf build; tsc",
     "start": "node .",
+    "i18n": "node scripts/i18n/generate.js",
     "actions": "act --rm"
   },
   "dependencies": {

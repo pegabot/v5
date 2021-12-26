@@ -104,7 +104,7 @@ export class InteractionManager {
             const command = this.commands.find((command) => command.alias?.includes(createdCommand.name) || false);
             if (!command) return;
             command.ids?.set(guild.id, createdCommand.id);
-            this.bot.logger.info(`deployed command (${createdCommand.name}) on guild (${guild.name})`);
+            this.bot.logger.info(`deployed command (${this.bot.i18n.__(command.data.name)}) on guild (${guild.name})`);
           });
           resolve(true);
         });
@@ -131,7 +131,7 @@ export class InteractionManager {
           const id = ids?.get(guild.id);
           if (!id) return;
 
-          this.bot.logger.info(`deploying permissions (${data.permissions.join(", ")}) for command (${data.name}) on guild (${guild.name})`);
+          this.bot.logger.info(`deploying permissions (${data.permissions.join(", ")}) for command (${this.bot.i18n.__(data.name)}) on guild (${guild.name})`);
 
           let permissions: ApplicationCommandPermissionData[] = [];
 
