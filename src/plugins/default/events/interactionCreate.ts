@@ -4,6 +4,7 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
+import { CommandInteraction } from "discord.js";
 import prettyMs from "pretty-ms";
 import { messages } from "../../../constants/messages";
 import { bot } from "../../../main";
@@ -13,6 +14,8 @@ import { getGuildLocale } from "../utils/guildLocale";
 Default.registerEvent("interactionCreate", async (interaction) => {
   // Type Guard to ensure that interaction is a message command
   if (interaction.isCommand()) {
+    if (!interaction.guildId) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale: "en" }));
+
     const locale = await getGuildLocale(interaction.guildId);
 
     // get the callback from the callback map and execute
@@ -21,7 +24,7 @@ Default.registerEvent("interactionCreate", async (interaction) => {
 
     try {
       const started = Date.now();
-      await callback(interaction, locale);
+      await callback(interaction as Omit<CommandInteraction, "guildId"> & { guildId: string }, locale);
       const ended = Date.now();
       bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of command (${interaction.commandName}) took ${prettyMs(ended - started)}`);
     } catch (error) {
