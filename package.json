@@ -18,7 +18,8 @@
     "build": "rm -rf build; tsc",
     "start": "node .",
     "i18n": "node scripts/i18n/generate.js",
-    "actions": "act --rm"
+    "actions": "act --rm",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@keyv/redis": "^2.2.1",
