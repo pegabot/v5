@@ -510,10 +510,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@keyv/redis@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@keyv/redis/-/redis-2.2.1.tgz#b0f91a53da14d9f893d3eea318ad23b9d6b60fb0"
-  integrity sha512-LktyRl8kqplElJVN4AJVwj5dsJc7ulza/2kqiksQzW4YHYucPhyvoFeLc7hKBmO1cdFHO12Q+3sjM+fL6WCb3g==
+"@keyv/redis@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@keyv/redis/-/redis-2.2.2.tgz#557cb36b38c95fb14e7da4c95d6af52a84078570"
+  integrity sha512-/Md3orSEJr/6oAHt+OlQydEJLf/bWI82YaHCje6BqZGHJJsCZ6LfrNIB0GrC3qWE8NB7vaG94y7L4mOXL8ztbg==
   dependencies:
     ioredis "^4.28.2"
 
