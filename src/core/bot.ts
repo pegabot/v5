@@ -45,6 +45,11 @@ export class Bot {
     });
   }
 
+  panic(message: string) {
+    this.logger.error(`recieved a panic, shutting down! => ${message}`);
+    this.ProcessEventManager.destroy("SIGABRT");
+  }
+
   login() {
     return this.client.login(process.env.BOT_TOKEN);
   }

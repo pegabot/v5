@@ -25,7 +25,7 @@ export abstract class BotPlugin {
     const store = new Keyv(process.env.REDIS_URL, { namespace: `plugin-${this.name}-${process.env.NODE_ENV}` });
 
     store.on("error", (error) => {
-      bot.logger.error(`The datastore of plugin (${this.name}) throw an error => ${error}`);
+      bot.panic(`The datastore of plugin (${this.name}) throw an error => ${error}`);
     });
 
     return store;
