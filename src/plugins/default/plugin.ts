@@ -8,6 +8,7 @@ import { BotPlugin } from "../../core/structures/BotPlugin";
 
 class Plugin extends BotPlugin {
   name = "Default";
+  envs = ["REDIS_URL", "BOT_TOKEN", "DEFAULT_INVITE_LINK"];
   store = this.getDatastore();
 }
 
@@ -15,6 +16,7 @@ export default new Plugin();
 
 require("./commands/invite");
 require("./commands/language");
+require("./commands/ping");
 require("./events/debug");
 require("./events/error");
 require("./events/guildCreate");

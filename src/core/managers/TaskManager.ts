@@ -11,7 +11,11 @@ import { Bot } from "../bot";
 import { BotTask } from "../structures/BotTask";
 
 export class TaskManager {
+  /**
+   * holds all tasks registered by all plugins
+   */
   tasks: Collection<string, BotTask> = new Collection();
+
   constructor(protected bot: Bot) {}
 
   register(task: BotTask) {

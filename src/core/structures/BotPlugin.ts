@@ -15,17 +15,36 @@ import { BotTask } from "./BotTask";
 config();
 
 export abstract class BotPlugin {
+  /**
+   * the plugins name
+   */
   abstract name: string;
+  /**
+   * @optional if set, the commands will only be deployed to those guilds
+   */
   guildIDs?: string[];
+  /**
+   * the core will store the events of this plugin in this array on startup
+   */
   events: BotEvent<keyof ClientEvents>[] = [];
+  /**
+   * the core will store the commands of this plugin in this array on startup
+   */
   commands: BotCommand[] = [];
+  /**
+   * the core will store the tasks of this plugin in this array on startup
+   */
   tasks: BotTask[] = [];
+  /**
+   * @optional if set, the core will check if those env keys are available on startup
+   */
+  envs?: string[];
 
   getDatastore() {
     const store = new Keyv(process.env.REDIS_URL, { namespace: `plugin-${this.name}-${process.env.NODE_ENV}` });
 
     store.on("error", (error) => {
-      bot.panic(`The datastore of plugin (${this.name}) throw an error => ${error}`);
+      bot.panic(`the datastore of plugin (${this.name}) throw an error => ${error}.`);
     });
 
     return store;

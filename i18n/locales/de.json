@@ -2,11 +2,6 @@
   "plugin": {
     "conspiracy": {
       "command": {
-        "ping": {
-          "name": "ping",
-          "description": "Ping Pong 🏓",
-          "response": "Pong 🏓"
-        },
         "name": {
           "name": "name",
           "description": "Generiere deinen eigenen Charakternamen.",
@@ -73,6 +68,11 @@
             "en": "Englisch",
             "none": "nichts"
           }
+        },
+        "ping": {
+          "name": "ping",
+          "description": "Ping Pong 🏓",
+          "response": "Pong 🏓"
         }
       }
     }

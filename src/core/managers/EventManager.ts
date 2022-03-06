@@ -9,7 +9,11 @@ import { Bot } from "../bot";
 import { BotEvent } from "../structures/BotEvent";
 
 export class EventManager {
+  /**
+   * holds all events registered by all plugins
+   */
   events: Collection<string, BotEvent<any>> = new Collection();
+
   constructor(private bot: Bot) {}
 
   register<K extends keyof ClientEvents>(event: BotEvent<K>) {

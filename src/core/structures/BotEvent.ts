@@ -7,6 +7,12 @@
 import { ClientEvents } from "discord.js";
 
 export interface BotEvent<K extends keyof ClientEvents> {
+  /**
+   * the event name
+   */
   name: K;
+  /**
+   * callback will be triggered if event is fired
+   */
   callback: (...args: ClientEvents[K]) => Promise<any> | any;
 }

@@ -5,8 +5,20 @@
  */
 
 export interface BotTask {
+  /**
+   * task name
+   */
   name: string;
+  /**
+   * @optional interval in millisenconds
+   */
   interval?: number;
+  /**
+   * @optional will be called on setup of this task
+   */
   setup?(): any | Promise<any>;
+  /**
+   * @optional will be called on scheduled task run
+   */
   callback?(): any | Promise<any>;
 }

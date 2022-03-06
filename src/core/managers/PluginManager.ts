@@ -45,11 +45,16 @@ export class PluginManager {
     // commands and tasks of the loaded plugins
 
     if (!this.plugins.get("Default")) {
-      this.bot.logger.error("The plugin (Default) is not available but required for correct functionality. Exiting.");
-      this.bot.ProcessEventManager.destroy();
+      this.bot.panic("plugin (Default) is not available but required.");
     }
 
     for (const plugin of [...this.plugins.values()]) {
+      if (plugin.envs?.length || 0 > 0) {
+        for (const key of plugin.envs as string[]) {
+          if (!process.env[key]) this.bot.panic(`missing env (${key}) for plugin (${plugin.name}).`);
+        }
+      }
+
       if (plugin.events.length > 0) {
         for (const event of plugin.events) {
           this.bot.EventManager.register(event);

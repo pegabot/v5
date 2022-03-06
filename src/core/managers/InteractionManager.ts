@@ -20,9 +20,13 @@ import { Bot } from "../bot";
 import { BotCommand } from "../structures/BotCommand";
 
 export class InteractionManager {
-  // this holds all the commands and their aliases and the ids which get returned by the API
+  /**
+   * holds all the commands and their aliases and the ids which get returned by the API
+   */
   commands: Collection<string, BotCommand> = new Collection();
-  // this holds all the command callbacks index by their aliases
+  /**
+   * holds all the command callbacks index by their aliases
+   */
   commandCallbacks: Collection<string, BotCommand["callback"]> = new Collection();
 
   constructor(private bot: Bot) {}
