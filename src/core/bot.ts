@@ -50,7 +50,11 @@ export class Bot {
     this.ProcessEventManager.destroy("SIGABRT");
   }
 
-  login() {
-    return this.client.login(process.env.BOT_TOKEN);
+  async login() {
+    try {
+      await this.client.login(process.env.BOT_TOKEN);
+    } catch (error) {
+      this.panic((error as Error).message as string);
+    }
   }
 }
