@@ -49,7 +49,7 @@ CONspiracy.registerCommand({
 });
 
 const roll = async (dice: string, interaction: (Omit<CommandInteraction, "guildId"> & { guildId: string }) | ButtonInteraction, locale: string) => {
-  let rollbutlerResponse: any = await rollDice(dice);
+  let rollbutlerResponse: any = await rollDice(dice, locale);
 
   try {
     rollbutlerResponse = JSON.parse(rollbutlerResponse);

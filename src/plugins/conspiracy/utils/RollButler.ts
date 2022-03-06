@@ -8,7 +8,7 @@ import bent from "bent";
 import { MessageEmbed, User } from "discord.js";
 import { colors } from "../../../constants/colors";
 
-const generateParams = (dice: string): URLSearchParams => {
+const generateParams = (dice: string, locale: string): URLSearchParams => {
   const params = new URLSearchParams();
   params.append("job", "api");
   params.append("source", "Pegabot");
@@ -18,12 +18,12 @@ const generateParams = (dice: string): URLSearchParams => {
   params.append("api_pass", process.env.ROLLBUTLER_PASS || "");
   params.append("roll", dice);
   params.append("logit", "true");
-  params.append("lang", "DE");
+  params.append("lang", locale.toUpperCase());
   params.append("format", "extended");
   return params;
 };
 
-export const rollDice = async (dice: string): Promise<string> => {
+export const rollDice = async (dice: string, locale: string): Promise<string> => {
   const handler = bent(`https://rollbutler.net/index.php?`, "string", {
     HttpMethod: "GET",
     Headers: {
@@ -34,7 +34,7 @@ export const rollDice = async (dice: string): Promise<string> => {
     },
   });
 
-  return handler(`${generateParams(dice).toString()}`);
+  return handler(`${generateParams(dice, locale).toString()}`);
 };
 
 export const RollbutlerEmbed = (dice: string, user: User, response: any): MessageEmbed => {
