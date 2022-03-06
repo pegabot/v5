@@ -13,26 +13,51 @@ import { getGuildLocale } from "../utils/guildLocale";
 
 Default.registerEvent("interactionCreate", async (interaction) => {
   // Type Guard to ensure that interaction is a message command
-  if (interaction.isCommand()) {
+  if (interaction.isCommand() || interaction.isButton()) {
     if (!interaction.guildId) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale: "en" }));
 
     const locale = await getGuildLocale(interaction.guildId);
 
-    // get the callback from the callback map and execute
-    const callback = bot.InteractionManager.commandCallbacks.get(interaction.commandName);
-    if (!callback) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_NOT_FOUND, locale }));
+    if (interaction.isCommand()) {
+      // get the callback from the callback map and execute
+      const callback = bot.InteractionManager.commandCallbacks.get(interaction.commandName);
+      if (!callback) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_NOT_FOUND, locale }));
 
-    try {
-      const started = Date.now();
-      await callback(interaction as Omit<CommandInteraction, "guildId"> & { guildId: string }, locale);
-      const ended = Date.now();
-      bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of command (${interaction.commandName}) took ${prettyMs(ended - started)}`);
-    } catch (error) {
-      bot.logger.error(`An error ocurred during the execution of command (${interaction.commandName}). => ${error}!`);
+      try {
+        const started = Date.now();
+        await callback(interaction as Omit<CommandInteraction, "guildId"> & { guildId: string }, locale);
+        const ended = Date.now();
+        bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of command (${interaction.commandName}) took ${prettyMs(ended - started)}`);
+      } catch (error) {
+        bot.logger.error(`An error ocurred during the execution of command (${interaction.commandName}). => ${error}!`);
 
-      interaction.deferred
-        ? interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }))
-        : interaction.reply({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
+        interaction.deferred
+          ? interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }))
+          : interaction.reply({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
+      }
+    } else {
+      const pluginName = interaction.customId.split(".")[0];
+      const buttonID = interaction.customId.split(".")[1];
+
+      // search for the button in the commands of the plugin
+      const callback = bot.PluginManager.plugins
+        .get(pluginName)
+        ?.commands.find((c) => c.buttons?.has(buttonID))
+        ?.buttons?.get(buttonID);
+      if (!callback) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_NOT_FOUND, locale }));
+
+      try {
+        const started = Date.now();
+        await callback(interaction, locale);
+        const ended = Date.now();
+        bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of button (${interaction.customId}) took ${prettyMs(ended - started)}`);
+      } catch (error) {
+        bot.logger.error(`An error ocurred during the execution of button (${interaction.customId}). => ${error}!`);
+
+        interaction.deferred
+          ? interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }))
+          : interaction.reply({ content: bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }), ephemeral: interaction.ephemeral || false });
+      }
     }
   }
 });

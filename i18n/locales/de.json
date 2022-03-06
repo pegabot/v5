@@ -30,6 +30,18 @@
             }
           },
           "response": "Dein zufällig generierter Name lautet: `{{name}}` 🎉"
+        },
+        "roll": {
+          "name": "roll",
+          "description": "angetrieben durch den Rollbutler",
+          "option": {
+            "command": {
+              "name": "dice",
+              "description": "Würfelkommando"
+            }
+          },
+          "dice_not_found": "Der Würfel ist leider vom Tisch gefallen. Ich kann keinen Reroll durchführen",
+          "response": "Ich habe für dich gewürfelt 🎲"
         }
       }
     },

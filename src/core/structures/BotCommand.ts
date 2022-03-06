@@ -4,7 +4,7 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { ApplicationCommandData, Collection, CommandInteraction, PermissionString } from "discord.js";
+import { ApplicationCommandData, ButtonInteraction, Collection, CommandInteraction, PermissionString } from "discord.js";
 
 export interface BotCommand {
   ids?: Collection<string, string>;
@@ -12,4 +12,5 @@ export interface BotCommand {
   guildIDs?: string[];
   data: ApplicationCommandData & { permissions?: PermissionString[] };
   callback: (interaction: Omit<CommandInteraction, "guildId"> & { guildId: string }, locale: string) => any | Promise<any>;
+  buttons?: Map<string, (interaction: ButtonInteraction, locale: string) => void | Promise<void>>;
 }

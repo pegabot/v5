@@ -8,5 +8,7 @@ declare namespace NodeJS {
   interface ProcessEnv {
     CONSPIRACY_GUILD_ID: string;
     CONSPIRACY_ADMINCHANNEL_ID: string;
+    ROLLBUTLER_KEY: string;
+    ROLLBUTLER_PASS: string;
   }
 }

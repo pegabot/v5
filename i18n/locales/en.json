@@ -30,6 +30,18 @@
             }
           },
           "response": "Your randomly generated name is: `{{name}}` 🎉"
+        },
+        "roll": {
+          "name": "roll",
+          "description": "powered by Rollbutler",
+          "option": {
+            "command": {
+              "name": "dice",
+              "description": "dice command"
+            }
+          },
+          "dice_not_found": "The dice has unfortunately fallen off the table. I cannot perform a reroll",
+          "response": "I throw some dice for you 🎲"
         }
       }
     },
