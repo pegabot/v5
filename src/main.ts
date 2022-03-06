@@ -4,7 +4,10 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-require("source-map-support").install();
+if (!process.env.NODE_ENV) process.env.NODE_ENV = "production";
+if (process.env.NODE_ENV === "development") {
+  require("source-map-support").install();
+}
 
 import { config } from "dotenv";
 import { Bot } from "./core/bot";
