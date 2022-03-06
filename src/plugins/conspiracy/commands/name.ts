@@ -47,9 +47,9 @@ CONspiracy.registerCommand({
       },
     ],
   },
-  callback: (interaction, locale) => {
-    const language = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.name.option.language.name", locale }));
-    const gender = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.name.option.gender.name", locale }));
+  callback: (interaction, locale, guildLocale) => {
+    const language = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.name.option.language.name", locale: guildLocale }));
+    const gender = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.name.option.gender.name", locale: guildLocale }));
 
     if (!language || !gender) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 

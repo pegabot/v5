@@ -4,8 +4,9 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import { ButtonInteraction, CommandInteraction, MessageActionRow, MessageAttachment, MessageButton, TextChannel } from "discord.js";
+import { ButtonInteraction, MessageActionRow, MessageAttachment, MessageButton, TextChannel } from "discord.js";
 import { messages } from "../../../constants/messages";
+import { ModifiedInteraction } from "../../../core/types/discord";
 import { bot } from "../../../main";
 import { fetchWithTimeout } from "../../../utils/fetchWithTimeout";
 import CONspiracy from "../plugin";
@@ -29,9 +30,9 @@ CONspiracy.registerCommand({
       },
     ],
   },
-  callback: async (interaction, locale) => {
+  callback: async (interaction, locale, guildLocale) => {
     await interaction.deferReply();
-    const dice = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.option.command.name", locale }));
+    const dice = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.option.command.name", locale: guildLocale }));
 
     if (!dice || dice.match(/([\dßo]{4,}[dw]|[\dßo]{2,}[dw][\dßo]{6,}|^\/teste?)/i)) return;
 
@@ -48,7 +49,7 @@ CONspiracy.registerCommand({
   }),
 });
 
-const roll = async (dice: string, interaction: (Omit<CommandInteraction, "guildId"> & { guildId: string }) | ButtonInteraction, locale: string) => {
+const roll = async (dice: string, interaction: ModifiedInteraction | ButtonInteraction, locale: string) => {
   let rollbutlerResponse: any = await rollDice(dice, locale);
 
   try {

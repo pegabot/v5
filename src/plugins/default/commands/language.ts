@@ -34,7 +34,7 @@ Default.registerCommand({
       },
     ],
   },
-  callback: async (interaction, current) => {
+  callback: async (interaction, _, current) => {
     // generateTranslation "plugin.default.command.language.option.language.name"
     const option = interaction.options.getString(bot.i18n.__({ phrase: "plugin.default.command.language.option.language.name", locale: current }));
     if (!option) return interaction.reply(bot.i18n.__(messages.COMMAND_TRY_AGAIN));

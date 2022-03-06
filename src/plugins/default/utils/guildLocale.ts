@@ -10,8 +10,8 @@ export const setGuildLocale = async (guildID: string, locale: string) => {
   return Default.store.set(`${guildID}-locale`, locale);
 };
 
-export const getGuildLocale = async (guildID: string): Promise<string> => {
-  return (await Default.store.get(`${guildID}-locale`)) || "en";
+export const getGuildLocale = async (guildID: string): Promise<string | undefined> => {
+  return await Default.store.get(`${guildID}-locale`);
 };
 
 export const deleteGuildLocale = async (guildID: string) => {

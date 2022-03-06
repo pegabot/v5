@@ -95,7 +95,7 @@ export class InteractionManager {
                 return command.guildIDs && command.guildIDs.includes(guild.id);
               })
               .map(({ data }) => data),
-            locale,
+            locale || "en",
           );
 
           // we need to store the id of the commands returned by the API
