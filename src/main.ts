@@ -35,5 +35,5 @@ export const bot = new Bot();
 
   bot.PluginManager.registerModules(argv);
 
-  // await bot.login();
+  await bot.login();
 })();
