@@ -5,7 +5,6 @@
  */
 
 import { ModifiedInteraction } from "../../../core/types/discord";
-import { getGuildLocale } from "./guildLocale";
 
 const localesMap = new Map(
   Object.entries({
@@ -15,13 +14,5 @@ const localesMap = new Map(
   }),
 );
 
-export const resolveLocale = async (interaction: ModifiedInteraction): Promise<string> => {
-  if (localesMap.has(interaction.locale)) return localesMap.get(interaction.locale) as string;
-
-  const customLocale = await getGuildLocale(interaction.guildId);
-  if (customLocale) return customLocale;
-
-  if (localesMap.has(interaction.guildLocale || "")) return localesMap.get(interaction.guildLocale || "") as string;
-
-  return "en";
-};
+export const resolveLocale = async (interaction: ModifiedInteraction): Promise<string> =>
+  localesMap.has(interaction.locale) ? (localesMap.get(interaction.locale) as string) : "en";
