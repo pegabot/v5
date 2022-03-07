@@ -8,6 +8,7 @@ import { BotPlugin } from "../../core/structures/BotPlugin";
 
 class CONspiracy extends BotPlugin {
   name = "CONspiracy";
+  arg = "CONspiracy";
   envs = ["CONSPIRACY_GUILD_ID", "CONSPIRACY_ADMINCHANNEL_ID", "ROLLBUTLER_KEY", "ROLLBUTLER_PASS"];
   guildIDs = [process.env.CONSPIRACY_GUILD_ID];
   store = this.getDatastore();

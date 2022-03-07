@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 import { config } from "dotenv";
+import yargs from "yargs";
 import { Bot } from "./core/bot";
 
 config();
@@ -17,7 +18,22 @@ config();
 export const bot = new Bot();
 
 (async () => {
-  // load and setup all plugins
-  await bot.PluginManager.setup();
-  await bot.login();
+  // load the plugins from disk
+  await bot.PluginManager.loadPlugins();
+
+  const pluginsWithArg = bot.PluginManager.plugins.filter((p) => p.arg !== undefined);
+
+  const argv = await yargs(process.argv).options(
+    pluginsWithArg.reduce((map: { [key: string]: {} }, p) => {
+      map[p.name] = {
+        type: "boolean",
+        description: `Set this arg to enable plugin (${p.name})`,
+      };
+      return map;
+    }, {}),
+  ).argv;
+
+  bot.PluginManager.registerModules(argv);
+
+  // await bot.login();
 })();

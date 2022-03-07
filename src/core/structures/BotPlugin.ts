@@ -39,6 +39,12 @@ export abstract class BotPlugin {
    * @optional if set, the core will check if those env keys are available on startup
    */
   envs?: string[];
+  /**
+   *
+   * @optional if set, this plugin will only be activated if arg is passed to entry file
+   * @example node . --arg
+   */
+  arg?: string;
 
   getDatastore() {
     const store = new Keyv(process.env.REDIS_URL, { namespace: `plugin-${this.name}-${process.env.NODE_ENV}` });

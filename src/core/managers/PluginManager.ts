@@ -14,12 +14,7 @@ export class PluginManager {
   plugins: Collection<string, BotPlugin> = new Collection();
   constructor(private bot: Bot) {}
 
-  async setup(): Promise<any> {
-    await this.loadPlugins();
-    this.registerModules();
-  }
-
-  private async loadPlugins(): Promise<any> {
+  async loadPlugins(): Promise<any> {
     // this function loads all the plugin files
     // and stores the plugins internally
     return new Promise(async (resolve, reject) => {
@@ -40,7 +35,7 @@ export class PluginManager {
     });
   }
 
-  private registerModules() {
+  registerModules(argv: { [key: string]: any }) {
     // this function registers the events,
     // commands and tasks of the loaded plugins
 
@@ -49,6 +44,12 @@ export class PluginManager {
     }
 
     for (const plugin of [...this.plugins.values()]) {
+      if (plugin.arg && !argv[plugin.name]) {
+        this.bot.logger.warn(`plugin (${plugin.name}) was not activated. Removing from loaded plugins`);
+        this.plugins = this.plugins.filter((p) => p.name !== plugin.name);
+        continue;
+      }
+
       if (plugin.envs?.length || 0 > 0) {
         for (const key of plugin.envs as string[]) {
           if (!process.env[key]) this.bot.panic(`missing env (${key}) for plugin (${plugin.name}).`);

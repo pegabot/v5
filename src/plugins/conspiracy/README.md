@@ -11,3 +11,8 @@ CONSPIRACY_ADMINCHANNEL_ID=<add the channel id of the admin channel of the CONsp
 ROLLBUTLER_KEY=<add your Rollbutler API Key here>
 ROLLBUTLER_PASS=<add your Rollbutler API Password here>
 ```
+
+To enable this plugin you need to pass an argument `--CONspiracy`.
+```
+node . --CONspiracy
+```
