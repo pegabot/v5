@@ -36,7 +36,9 @@
             }
           },
           "dice_not_found": "The dice has unfortunately fallen off the table. I cannot perform a reroll",
-          "response": "I throw some dice for you 🎲"
+          "response": "I throw some dice for you 🎲",
+          "reroll": "Reroll",
+          "rules": "Dice Instructions"
         }
       }
     },

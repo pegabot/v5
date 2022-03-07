@@ -62,10 +62,28 @@ const roll = async (dice: string, interaction: ModifiedInteraction | ButtonInter
   if (!channel) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 
   const successRow = new MessageActionRow().addComponents(
-    new MessageButton().setCustomId("CONspiracy.reroll").setEmoji("🎲").setStyle("PRIMARY").setLabel("Neu würfeln"),
+    // generateTranslation "plugin.conspiracy.command.roll.reroll"
+    new MessageButton()
+      .setCustomId("CONspiracy.reroll")
+      .setEmoji("🎲")
+      .setStyle("PRIMARY")
+      .setLabel(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.reroll", locale })),
+    // generateTranslation "plugin.conspiracy.command.roll.rules"
+    new MessageButton()
+      .setStyle("LINK")
+      .setEmoji("📄")
+      .setLabel(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.rules", locale }))
+      .setURL("https://jaegers.net/rbtlri"),
   );
 
-  const errorRow = new MessageActionRow().addComponents(new MessageButton().setStyle("LINK").setLabel("Zur Anleitung").setURL("https://jaegers.net/rbtlri"));
+  const errorRow = new MessageActionRow().addComponents(
+    // generateTranslation "plugin.conspiracy.command.roll.rules"
+    new MessageButton()
+      .setStyle("LINK")
+      .setEmoji("📄")
+      .setLabel(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.rules", locale }))
+      .setURL("https://jaegers.net/rbtlri"),
+  );
 
   const success: boolean = !rollbutlerResponse.message.match(/.*fehlgeschlagen.*/);
 

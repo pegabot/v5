@@ -31,12 +31,14 @@
           "description": "angetrieben durch den Rollbutler",
           "option": {
             "command": {
-              "name": "dice",
+              "name": "würfel",
               "description": "Würfelkommando"
             }
           },
           "dice_not_found": "Der Würfel ist leider vom Tisch gefallen. Ich kann keinen Reroll durchführen",
-          "response": "Ich habe für dich gewürfelt 🎲"
+          "response": "Ich habe für dich gewürfelt 🎲",
+          "reroll": "Neu würfeln",
+          "rules": "Zur Anleitung"
         }
       }
     },
