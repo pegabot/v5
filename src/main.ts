@@ -10,8 +10,8 @@ if (process.env.NODE_ENV === "development") {
 }
 
 import { config } from "dotenv";
-import yargs from "yargs";
 import { Bot } from "./core/bot";
+import { getArgs } from "./utils/getArgs";
 
 config();
 
@@ -21,19 +21,10 @@ export const bot = new Bot();
   // load the plugins from disk
   await bot.PluginManager.loadPlugins();
 
-  const pluginsWithArg = bot.PluginManager.plugins.filter((p) => p.arg !== undefined);
+  // get the args passed to this process and register the modules
+  const args = await getArgs(bot);
+  bot.PluginManager.registerModules(args);
 
-  const argv = await yargs(process.argv).options(
-    pluginsWithArg.reduce((map: { [key: string]: {} }, p) => {
-      map[p.name] = {
-        type: "boolean",
-        description: `Set this arg to enable plugin (${p.name})`,
-      };
-      return map;
-    }, {}),
-  ).argv;
-
-  bot.PluginManager.registerModules(argv);
-
+  // log into the Discord API
   await bot.login();
 })();
