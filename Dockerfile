@@ -12,7 +12,7 @@ RUN yarn test
 
 RUN yarn build
 
-RUN npm prune --production
+RUN yarn install --production
 
 FROM node:16-alpine
 

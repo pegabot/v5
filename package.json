@@ -1,27 +1,43 @@
 {
   "name": "v5",
-  "description": "The fifth version of @pegabot on Discord",
   "version": "x.y.z",
-  "main": "build/main.js",
-  "author": "The Pegabot authors",
-  "license": "AGPL-3.0-only",
+  "description": "The fifth version of @pegabot on Discord",
   "repository": {
     "type": "git",
     "url": "https://github.com/pegabot/v5.git"
   },
-  "engines": {
-    "node": ">=16.x"
-  },
+  "license": "AGPL-3.0-only",
+  "author": "The Pegabot authors",
+  "main": "build/main.js",
   "scripts": {
-    "test": "jest . --verbose --passWithNoTests",
-    "dev": "nodemon .  --signal SIGINT",
-    "build": "rm -rf build; tsc",
-    "start": "node .",
-    "container:dev:start": " docker run --name pegabot --env-file .env --rm --link redis:redis pegabot",
-    "container:dev:build": "docker build -t pegabot .",
-    "i18n": "node scripts/i18n/generate.js",
     "actions": "act --rm",
-    "prepare": "husky install"
+    "build": "rm -rf build; tsc",
+    "container:dev:build": "docker build -t pegabot .",
+    "container:dev:start": " docker run --name pegabot --env-file .env --rm --link redis:redis pegabot",
+    "dev": "nodemon .  --signal SIGINT",
+    "i18n": "node scripts/i18n/generate.js",
+    "prepare": "husky install",
+    "start": "node .",
+    "test": "jest . --verbose --passWithNoTests"
+  },
+  "nodemonConfig": {
+    "exec": "yarn build --sourceMap; yarn start",
+    "ext": "ts",
+    "ignore": [
+      "dist/*"
+    ],
+    "verbose": true,
+    "watch": [
+      "src/"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
   },
   "dependencies": {
     "@keyv/redis": "^2.2.3",
@@ -32,7 +48,6 @@
     "i18n": "^0.14.2",
     "keyv": "^4.1.1",
     "pretty-ms": "^7.0.1",
-    "source-map-support": "^0.5.21",
     "winston": "^3.6.0",
     "yargs": "^17.3.1"
   },
@@ -47,26 +62,11 @@
     "husky": "^7.0.4",
     "jest": "^26.6.3",
     "nodemon": "^2.0.9",
+    "source-map-support": "^0.5.21",
     "ts-jest": "^26.5.6",
     "typescript": "^4.6.2"
   },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    }
-  },
-  "nodemonConfig": {
-    "verbose": true,
-    "watch": [
-      "src/"
-    ],
-    "ignore": [
-      "dist/*"
-    ],
-    "ext": "ts",
-    "exec": "yarn build --sourceMap; yarn start"
+  "engines": {
+    "node": ">=16.x"
   }
 }

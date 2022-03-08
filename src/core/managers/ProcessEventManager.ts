@@ -19,7 +19,7 @@ export class ProcessEventManager {
     });
   }
 
-  async destroy(signal?: NodeJS.Signals): Promise<void> {
+  destroy(signal?: NodeJS.Signals): void {
     this.bot.logger.warn(`${signal || "Exit signal"} recieved, destroying the bot.`);
 
     this.bot.client.destroy();

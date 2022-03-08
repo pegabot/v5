@@ -7,7 +7,7 @@
 import { Client, Intents } from "discord.js";
 import { I18n } from "i18n";
 import path from "path";
-import { createLogger, format, transports } from "winston";
+import winston from "winston";
 import { EventManager } from "./managers/EventManager";
 import { InteractionManager } from "./managers/InteractionManager";
 import { PluginManager } from "./managers/PluginManager";
@@ -26,14 +26,9 @@ export class Bot {
   ProcessEventManager = new ProcessEventManager(this);
   TaskManager = new TaskManager(this);
 
-  logger = createLogger({
-    transports: [new transports.Console({ level: "debug" })],
-    format: format.combine(format.errors({ stack: true }), format.splat(), format.colorize(), format.simple()),
-  });
-
   i18n = new I18n();
 
-  constructor() {
+  constructor(public logger: winston.Logger) {
     this.ProcessEventManager.setupEvents();
     this.i18n.configure({
       defaultLocale: "en",
