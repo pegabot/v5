@@ -22,6 +22,4 @@ COPY --from=builder /usr/src/app/build ./build
 COPY --from=builder /usr/src/app/i18n ./i18n
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 
-EXPOSE 8080
-
 CMD [ "node", "build/main.js" ]
