@@ -44,7 +44,7 @@ export class PluginManager {
     }
 
     for (const plugin of [...this.plugins.values()]) {
-      if (plugin.arg && !argv[plugin.name]) {
+      if (plugin.arg && !argv[plugin.arg]) {
         this.bot.logger.warn(`plugin (${plugin.name}) was not activated. Removing from loaded plugins`);
         this.plugins = this.plugins.filter((p) => p.name !== plugin.name);
         continue;

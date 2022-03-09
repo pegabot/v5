@@ -12,10 +12,11 @@ export const getArgs = async (bot: Bot) => {
 
   return yargs(process.argv).options(
     pluginsWithArg.reduce((map: { [key: string]: {} }, p) => {
-      map[p.name] = {
-        type: "boolean",
-        description: `Set this arg to enable plugin (${p.name})`,
-      };
+      if (p.arg)
+        map[p.arg] = {
+          type: "boolean",
+          description: `Set this arg to enable plugin (${p.name})`,
+        };
       return map;
     }, {}),
   ).argv;
