@@ -4,25 +4,26 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
+import { exit } from "process";
 import { Bot } from "../bot";
 
 export class ProcessEventManager {
+  private signals: NodeJS.Signals[] = ["SIGABRT", "SIGALRM", "SIGINT", "SIGHUP"];
+
   constructor(private bot: Bot) {}
 
   setupEvents(): void {
-    process.on("SIGINT", (signal) => {
-      this.destroy(signal);
-    });
-
-    process.on("SIGTERM", (signal) => {
-      this.destroy(signal);
+    this.signals.forEach((s) => {
+      process.on(s, (signal: NodeJS.Signals) => {
+        this.destroy(signal);
+      });
     });
   }
 
-  destroy(signal?: NodeJS.Signals): void {
+  destroy(signal: NodeJS.Signals): void {
     this.bot.logger.warn(`${signal || "Exit signal"} recieved, destroying the bot.`);
 
     this.bot.client.destroy();
-    process.exit(0);
+    exit(0);
   }
 }
