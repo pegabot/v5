@@ -8,7 +8,7 @@ import { bot } from "../../../main";
 import Default from "../plugin";
 
 Default.registerEvent("ready", async () => {
-  bot.logger.info("Bot is online and ready");
+  Default.logger.info("Bot is online and ready");
 
   // the bot is ready => deploy the commands
   // on all servers the bot is a member of &

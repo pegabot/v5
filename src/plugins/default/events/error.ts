@@ -7,4 +7,4 @@
 import { bot } from "../../../main";
 import Default from "../plugin";
 
-Default.registerEvent("error", (message) => bot.logger.error(message));
+Default.registerEvent("error", (message) => Default.logger.error(message));

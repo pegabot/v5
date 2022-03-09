@@ -29,9 +29,9 @@ Default.registerEvent("interactionCreate", async (interaction) => {
         const started = Date.now();
         await callback(interaction as ModifiedInteraction, locale, guildLocale);
         const ended = Date.now();
-        bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of command (${interaction.commandName}) took ${prettyMs(ended - started)}`);
+        Default.logger.info(`${interaction.guild?.name} - ${locale} => execution of command (${interaction.commandName}) took ${prettyMs(ended - started)}`);
       } catch (error) {
-        bot.logger.error(`An error ocurred during the execution of command (${interaction.commandName}). => ${error}!`);
+        Default.logger.error(`An error ocurred during the execution of command (${interaction.commandName}). => ${error}!`);
 
         interaction.deferred
           ? interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }))
@@ -52,9 +52,9 @@ Default.registerEvent("interactionCreate", async (interaction) => {
         const started = Date.now();
         await callback(interaction, locale);
         const ended = Date.now();
-        bot.logger.info(`${interaction.guild?.name} - ${locale} => execution of button (${interaction.customId}) took ${prettyMs(ended - started)}`);
+        Default.logger.info(`${interaction.guild?.name} - ${locale} => execution of button (${interaction.customId}) took ${prettyMs(ended - started)}`);
       } catch (error) {
-        bot.logger.error(`An error ocurred during the execution of button (${interaction.customId}). => ${error}!`);
+        Default.logger.error(`An error ocurred during the execution of button (${interaction.customId}). => ${error}!`);
 
         interaction.deferred
           ? interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }))

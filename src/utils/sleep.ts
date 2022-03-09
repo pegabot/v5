@@ -4,8 +4,11 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
-import Default from "../plugin";
-
-Default.registerEvent("debug", (message) => {
-  Default.logger.debug(message);
-});
+/**
+ *
+ * @param duration duration to sleep in ms
+ */
+export const sleep = (duration: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, duration);
+  });

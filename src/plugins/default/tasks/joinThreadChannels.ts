@@ -9,14 +9,14 @@ import Default from "../plugin";
 
 Default.registerTask({
   name: "join thread channels",
-  interval: 5000,
+  interval: 15000,
   callback: async () => {
     (await bot.client.guilds.fetch()).forEach(async (guild) => {
       (await guild?.fetch())?.channels.cache.forEach(async (channel) => {
         if (!channel.isThread()) return;
         if (channel.joinable) {
           channel.join();
-          bot.logger.info(`joined thread channel (${channel.name}) on guild (${guild.name})`);
+          Default.logger.info(`joined thread channel (${channel.name}) on guild (${guild.name})`);
         }
       });
     });

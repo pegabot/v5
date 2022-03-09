@@ -50,7 +50,7 @@ export class PluginManager {
         continue;
       }
 
-      this.bot.logger.info(`enabling plugin ${plugin.name}`);
+      this.bot.logger.info(`enabling plugin (${plugin.name})`);
 
       if (plugin.envs?.length || 0 > 0) {
         for (const key of plugin.envs as string[]) {

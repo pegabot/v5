@@ -10,6 +10,7 @@ class Plugin extends BotPlugin {
   name = "Default";
   envs = ["REDIS_URL", "BOT_TOKEN", "DEFAULT_INVITE_LINK"];
   store = this.getDatastore();
+  logger = this.getLogger();
 }
 
 export default new Plugin();

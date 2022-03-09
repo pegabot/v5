@@ -8,6 +8,7 @@ import { ClientEvents } from "discord.js";
 import { config } from "dotenv";
 import Keyv from "keyv";
 import { bot } from "../../main";
+import { getLogger } from "../../utils/getLogger";
 import { BotCommand } from "./BotCommand";
 import { BotEvent } from "./BotEvent";
 import { BotTask } from "./BotTask";
@@ -54,6 +55,10 @@ export abstract class BotPlugin {
     });
 
     return store;
+  }
+
+  getLogger() {
+    return getLogger(`Plugin (${this.name})`);
   }
 
   registerEvent<K extends keyof ClientEvents>(name: K, callback: (...args: ClientEvents[K]) => Promise<any> | any) {
