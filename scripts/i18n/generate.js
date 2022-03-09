@@ -9,6 +9,7 @@ const fs = require("fs");
 const { I18n } = require("i18n");
 const { glob } = require("glob");
 const i18n = new I18n();
+const sortJson = require("sort-json");
 
 i18n.configure({
   defaultLocale: "en",
@@ -32,7 +33,13 @@ const processData = () => {
           eval(`i18n.__(${command})`);
         }
       }
-      resolve();
+
+      glob(path.resolve(__dirname, "../../i18n/**/*.json"), async (error, files) => {
+        for (const file of files) {
+          sortJson.overwrite(file, { ignoreCase: true, depth: 99999 });
+        }
+        resolve();
+      });
     });
   });
 };
