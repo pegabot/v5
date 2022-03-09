@@ -102,14 +102,19 @@ export class InteractionManager {
             locale || "en",
           );
 
-          // we need to store the id of the commands returned by the API
-          const createdCommands = await (guild as Guild)?.commands.set(data);
-          createdCommands.forEach((createdCommand) => {
-            const command = this.commands.find((command) => command.alias?.includes(createdCommand.name) || false);
-            if (!command) return;
-            command.ids?.set(guild.id, createdCommand.id);
-            this.bot.logger.info(`deployed command (${this.bot.i18n.__(command.data.name)}) on guild (${guild.name})`);
-          });
+          try {
+            // we need to store the id of the commands returned by the API
+            const createdCommands = await (guild as Guild)?.commands.set(data);
+            createdCommands.forEach((createdCommand) => {
+              const command = this.commands.find((command) => command.alias?.includes(createdCommand.name) || false);
+              if (!command) return;
+              command.ids?.set(guild.id, createdCommand.id);
+              this.bot.logger.info(`deployed command (${this.bot.i18n.__(command.data.name)}) on guild (${guild.name})`);
+            });
+          } catch (error) {
+            this.bot.logger.error(`an error occured during command deployment on guild (${guild.name}) => ${error}`);
+          }
+
           resolve(true);
         });
       }),
@@ -164,7 +169,7 @@ export class InteractionManager {
         // deploy the permissions on the guild
         await guild.commands.permissions.set({ fullPermissions });
       } catch (error: any) {
-        this.bot.logger.error((error as Error).message);
+        this.bot.logger.error(`an error occured during permissions deployment on guild ${guild.name} => ${error}`);
       }
     });
   }
