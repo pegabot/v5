@@ -9,30 +9,31 @@ import { messages } from "../../../constants/messages";
 import { ModifiedInteraction } from "../../../core/types/discord";
 import { bot } from "../../../main";
 import { fetchWithTimeout } from "../../../utils/fetchWithTimeout";
-import CONspiracy from "../plugin";
+import Roleplaying from "../plugin";
 import { RollbutlerEmbed, rollDice } from "../utils/RollButler";
 
-CONspiracy.registerCommand({
+Roleplaying.registerCommand({
   data: {
-    // generateTranslation "plugin.conspiracy.command.roll.name"
-    name: "plugin.conspiracy.command.roll.name",
-    // generateTranslation "plugin.conspiracy.command.roll.description"
-    description: "plugin.conspiracy.command.roll.description",
+    // generateTranslation "plugin.roleplaying.command.roll.name"
+    name: "plugin.roleplaying.command.roll.name",
+
+    // generateTranslation "plugin.roleplaying.command.roll.description"
+    description: "plugin.roleplaying.command.roll.description",
 
     options: [
       {
         required: true,
-        // generateTranslation "plugin.conspiracy.command.roll.option.command.name"
-        name: "plugin.conspiracy.command.roll.option.command.name",
+        // generateTranslation "plugin.roleplaying.command.roll.option.command.name"
+        name: "plugin.roleplaying.command.roll.option.command.name",
         type: "STRING",
-        // generateTranslation "plugin.conspiracy.command.roll.option.command.description"
-        description: "plugin.conspiracy.command.roll.option.command.description",
+        // generateTranslation "plugin.roleplaying.command.roll.option.command.description"
+        description: "plugin.roleplaying.command.roll.option.command.description",
       },
     ],
   },
   callback: async (interaction, locale, guildLocale) => {
     await interaction.deferReply();
-    const dice = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.option.command.name", locale: guildLocale }));
+    const dice = interaction.options.getString(bot.i18n.__({ phrase: "plugin.roleplaying.command.roll.option.command.name", locale: guildLocale }));
 
     if (!dice || dice.match(/([\dßo]{4,}[dw]|[\dßo]{2,}[dw][\dßo]{6,}|^\/teste?)/i)) return;
 
@@ -40,10 +41,10 @@ CONspiracy.registerCommand({
   },
   buttons: new Map<string, (interaction: ButtonInteraction, locale: string) => void>().set("reroll", async (interaction, locale) => {
     await interaction.deferReply();
-    const dice = await CONspiracy.store.get(`roll-dice-${interaction.message.id}`);
+    const dice = await Roleplaying.store.get(`roll-dice-${interaction.message.id}`);
 
-    // generateTranslation "plugin.conspiracy.command.roll.dice_not_found"
-    if (!dice) return interaction.reply(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.dice_not_found", locale }));
+    // generateTranslation "plugin.roleplaying.command.roll.dice_not_found"
+    if (!dice) return interaction.reply(bot.i18n.__({ phrase: "plugin.roleplaying.command.roll.dice_not_found", locale }));
 
     roll(dice, interaction, locale);
   }),
@@ -62,26 +63,26 @@ const roll = async (dice: string, interaction: ModifiedInteraction | ButtonInter
   if (!channel) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 
   const successRow = new MessageActionRow().addComponents(
-    // generateTranslation "plugin.conspiracy.command.roll.reroll"
+    // generateTranslation "plugin.roleplaying.command.roll.reroll"
     new MessageButton()
-      .setCustomId("CONspiracy.reroll")
+      .setCustomId("Roleplaying.reroll")
       .setEmoji("🎲")
       .setStyle("PRIMARY")
-      .setLabel(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.reroll", locale })),
-    // generateTranslation "plugin.conspiracy.command.roll.rules"
+      .setLabel(bot.i18n.__({ phrase: "plugin.roleplaying.command.roll.reroll", locale })),
+    // generateTranslation "plugin.roleplaying.command.roll.rules"
     new MessageButton()
       .setStyle("LINK")
       .setEmoji("📄")
-      .setLabel(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.rules", locale }))
+      .setLabel(bot.i18n.__({ phrase: "plugin.roleplaying.command.roll.rules", locale }))
       .setURL("https://jaegers.net/rbtlri"),
   );
 
   const errorRow = new MessageActionRow().addComponents(
-    // generateTranslation "plugin.conspiracy.command.roll.rules"
+    // generateTranslation "plugin.roleplaying.command.roll.rules"
     new MessageButton()
       .setStyle("LINK")
       .setEmoji("📄")
-      .setLabel(bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.rules", locale }))
+      .setLabel(bot.i18n.__({ phrase: "plugin.roleplaying.command.roll.rules", locale }))
       .setURL("https://jaegers.net/rbtlri"),
   );
 
@@ -101,9 +102,9 @@ const roll = async (dice: string, interaction: ModifiedInteraction | ButtonInter
     replied = await (channel as TextChannel).send({ embeds: [embed], components: success === true ? [successRow] : [errorRow] });
   }
 
-  // generateTranslation "plugin.conspiracy.command.roll.response"
-  interaction.editReply({ content: bot.i18n.__({ phrase: "plugin.conspiracy.command.roll.response", locale }) });
+  // generateTranslation "plugin.roleplaying.command.roll.response"
+  interaction.editReply({ content: bot.i18n.__({ phrase: "plugin.roleplaying.command.roll.response", locale }) });
   if (!success) return;
 
-  CONspiracy.store.set(`roll-dice-${replied.id}`, dice, 1000 * 3600 * 24);
+  Roleplaying.store.set(`roll-dice-${replied.id}`, dice, 1000 * 3600 * 24);
 };

@@ -6,15 +6,14 @@
 
 import { BotPlugin } from "../../core/structures/BotPlugin";
 
-class CONspiracy extends BotPlugin {
-  name = "CONspiracy";
-  arg = "CONspiracy";
-  envs = ["CONSPIRACY_GUILD_ID", "CONSPIRACY_ADMINCHANNEL_ID", "ROLLBUTLER_KEY", "ROLLBUTLER_PASS"];
-  guildIDs = [process.env.CONSPIRACY_GUILD_ID];
+class Roleplaying extends BotPlugin {
+  name = "Roleplaying";
+  arg = "roleplaying";
+  envs = ["ROLLBUTLER_KEY", "ROLLBUTLER_PASS"];
   store = this.getDatastore();
 }
 
-export default new CONspiracy();
+export default new Roleplaying();
 
 require("./commands/name");
 require("./commands/roll");

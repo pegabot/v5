@@ -6,50 +6,50 @@
 
 import { messages } from "../../../constants/messages";
 import { bot } from "../../../main";
-import CONspiracy from "../plugin";
+import Roleplaying from "../plugin";
 
-CONspiracy.registerCommand({
+Roleplaying.registerCommand({
   data: {
-    // generateTranslation "plugin.conspiracy.command.name.name"
-    name: "plugin.conspiracy.command.name.name",
-    // generateTranslation "plugin.conspiracy.command.name.description"
-    description: "plugin.conspiracy.command.name.description",
+    // generateTranslation "plugin.roleplaying.command.name.name"
+    name: "plugin.roleplaying.command.name.name",
+    // generateTranslation "plugin.roleplaying.command.name.description"
+    description: "plugin.roleplaying.command.name.description",
     options: [
       {
         required: true,
-        // generateTranslation "plugin.conspiracy.command.name.option.language.name"
-        name: "plugin.conspiracy.command.name.option.language.name",
-        // generateTranslation "plugin.conspiracy.command.name.option.language.description"
-        description: "plugin.conspiracy.command.name.option.language.description",
+        // generateTranslation "plugin.roleplaying.command.name.option.language.name"
+        name: "plugin.roleplaying.command.name.option.language.name",
+        // generateTranslation "plugin.roleplaying.command.name.option.language.description"
+        description: "plugin.roleplaying.command.name.option.language.description",
         type: "STRING",
         choices: [
-          // generateTranslation "plugin.conspiracy.command.name.option.language.choice.de"
-          { name: "plugin.conspiracy.command.name.option.language.choice.de", value: "de" },
-          // generateTranslation "plugin.conspiracy.command.name.option.language.choice.en"
-          { name: "plugin.conspiracy.command.name.option.language.choice.en", value: "en" },
-          // generateTranslation "plugin.conspiracy.command.name.option.language.choice.ww"
-          { name: "plugin.conspiracy.command.name.option.language.choice.ww", value: "ww" },
+          // generateTranslation "plugin.roleplaying.command.name.option.language.choice.de"
+          { name: "plugin.roleplaying.command.name.option.language.choice.de", value: "de" },
+          // generateTranslation "plugin.roleplaying.command.name.option.language.choice.en"
+          { name: "plugin.roleplaying.command.name.option.language.choice.en", value: "en" },
+          // generateTranslation "plugin.roleplaying.command.name.option.language.choice.ww"
+          { name: "plugin.roleplaying.command.name.option.language.choice.ww", value: "ww" },
         ],
       },
       {
         required: true,
-        // generateTranslation "plugin.conspiracy.command.name.option.gender.name"
-        name: "plugin.conspiracy.command.name.option.gender.name",
-        // generateTranslation "plugin.conspiracy.command.name.option.gender.description"
-        description: "plugin.conspiracy.command.name.option.gender.description",
+        // generateTranslation "plugin.roleplaying.command.name.option.gender.name"
+        name: "plugin.roleplaying.command.name.option.gender.name",
+        // generateTranslation "plugin.roleplaying.command.name.option.gender.description"
+        description: "plugin.roleplaying.command.name.option.gender.description",
         type: "STRING",
         choices: [
-          // generateTranslation "plugin.conspiracy.command.name.option.gender.choice.male"
-          { name: "plugin.conspiracy.command.name.option.gender.choice.male", value: "m" },
-          // generateTranslation "plugin.conspiracy.command.name.option.gender.choice.female"
-          { name: "plugin.conspiracy.command.name.option.gender.choice.female", value: "w" },
+          // generateTranslation "plugin.roleplaying.command.name.option.gender.choice.male"
+          { name: "plugin.roleplaying.command.name.option.gender.choice.male", value: "m" },
+          // generateTranslation "plugin.roleplaying.command.name.option.gender.choice.female"
+          { name: "plugin.roleplaying.command.name.option.gender.choice.female", value: "w" },
         ],
       },
     ],
   },
   callback: (interaction, locale, guildLocale) => {
-    const language = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.name.option.language.name", locale: guildLocale }));
-    const gender = interaction.options.getString(bot.i18n.__({ phrase: "plugin.conspiracy.command.name.option.gender.name", locale: guildLocale }));
+    const language = interaction.options.getString(bot.i18n.__({ phrase: "plugin.roleplaying.command.name.option.language.name", locale: guildLocale }));
+    const gender = interaction.options.getString(bot.i18n.__({ phrase: "plugin.roleplaying.command.name.option.gender.name", locale: guildLocale }));
 
     if (!language || !gender) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 
@@ -58,7 +58,7 @@ CONspiracy.registerCommand({
 
     interaction.reply(
       bot.i18n.__(
-        { phrase: "plugin.conspiracy.command.name.response", locale },
+        { phrase: "plugin.roleplaying.command.name.response", locale },
         {
           name: `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${surnames[Math.floor(Math.random() * surnames.length)]}`,
         },

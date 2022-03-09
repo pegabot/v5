@@ -1,90 +1,90 @@
 {
+  "constants": {
+    "messages": {
+      "COMMAND_INTERNAL_ERROR": "Ein Fehler ist aufgetreten, bitte versuche es später erneut!",
+      "COMMAND_NOT_FOUND": "Der zugehörige Command wurde nicht gefunden!",
+      "COMMAND_TRY_AGAIN": "Ich arbeite gerade, bitte versuche es in Kürze erneut!",
+      "COMMAND_USER_NOT_FOUND": "Der User konnte nicht gefunden werden!"
+    }
+  },
   "plugin": {
-    "conspiracy": {
+    "default": {
       "command": {
-        "name": {
-          "name": "name",
-          "description": "Generiere deinen eigenen Charakternamen.",
+        "invite": {
+          "buttonText": "Lade mich ein!",
+          "description": "Lade diesen Bot auf deinen Server ein!",
+          "name": "einladung",
+          "response": "Bitteschön 🎉"
+        },
+        "language": {
+          "description": "Lege die Sprache fest, welche dieser Bot auf diesem Server verwenden soll.",
+          "locale": {
+            "de": "Deutsch",
+            "en": "Englisch",
+            "none": "nichts"
+          },
+          "name": "sprache",
           "option": {
             "language": {
-              "name": "sprache",
-              "description": "Welche Sprache soll dein Name erhalten?",
+              "choice": {
+                "de": "Deutsch",
+                "en": "Englisch"
+              },
+              "description": "Wähle eine Sprache für diesen Server.",
+              "name": "sprache"
+            }
+          },
+          "response": "Ich habe die Sprache von `{{old}}` zu `{{new}}` geändert. Es kann einen Moment dauern, bis die Änderung durchgeführt wurde.",
+          "same": "Hey, es sieht so aus, als würde alles beim Alten bleiben 🤣"
+        },
+        "ping": {
+          "description": "Ping Pong 🏓",
+          "name": "ping",
+          "response": "Pong 🏓"
+        }
+      }
+    },
+    "roleplaying": {
+      "command": {
+        "name": {
+          "description": "Generiere deinen eigenen Charakternamen.",
+          "name": "name",
+          "option": {
+            "gender": {
+              "choice": {
+                "female": "Weiblich",
+                "male": "Männlich"
+              },
+              "description": "Welches Geschlecht soll dein Name erhalten?",
+              "name": "geschlecht"
+            },
+            "language": {
               "choice": {
                 "de": "Deutsch",
                 "en": "Englisch",
                 "ww": "Winterwald"
-              }
-            },
-            "gender": {
-              "name": "geschlecht",
-              "description": "Welches Geschlecht soll dein Name erhalten?",
-              "choice": {
-                "male": "Männlich",
-                "female": "Weiblich"
-              }
+              },
+              "description": "Welche Sprache soll dein Name erhalten?",
+              "name": "sprache"
             }
           },
           "response": "Dein zufällig generierter Name lautet: `{{name}}` 🎉"
         },
         "roll": {
-          "name": "roll",
           "description": "angetrieben durch den Rollbutler",
+          "dice_not_found": "Der Würfel ist leider vom Tisch gefallen. Ich kann keinen Reroll durchführen",
+          "name": "roll",
           "option": {
             "command": {
-              "name": "würfel",
-              "description": "Würfelkommando"
+              "description": "Würfelkommando",
+              "name": "würfel"
             }
           },
-          "dice_not_found": "Der Würfel ist leider vom Tisch gefallen. Ich kann keinen Reroll durchführen",
-          "response": "Ich habe für dich gewürfelt 🎲",
           "reroll": "Neu würfeln",
+          "response": "Ich habe für dich gewürfelt 🎲",
           "rules": "Zur Anleitung"
         }
       }
-    },
-    "default": {
-      "command": {
-        "invite": {
-          "name": "einladung",
-          "description": "Lade diesen Bot auf deinen Server ein!",
-          "response": "Bitteschön 🎉",
-          "buttonText": "Lade mich ein!"
-        },
-        "language": {
-          "name": "sprache",
-          "description": "Lege die Sprache fest, welche dieser Bot auf diesem Server verwenden soll.",
-          "option": {
-            "language": {
-              "name": "sprache",
-              "description": "Wähle eine Sprache für diesen Server.",
-              "choice": {
-                "de": "Deutsch",
-                "en": "Englisch"
-              }
-            }
-          },
-          "same": "Hey, es sieht so aus, als würde alles beim Alten bleiben 🤣",
-          "response": "Ich habe die Sprache von `{{old}}` zu `{{new}}` geändert. Es kann einen Moment dauern, bis die Änderung durchgeführt wurde.",
-          "locale": {
-            "de": "Deutsch",
-            "en": "Englisch",
-            "none": "nichts"
-          }
-        },
-        "ping": {
-          "name": "ping",
-          "description": "Ping Pong 🏓",
-          "response": "Pong 🏓"
-        }
-      }
-    }
-  },
-  "constants": {
-    "messages": {
-      "COMMAND_INTERNAL_ERROR": "Ein Fehler ist aufgetreten, bitte versuche es später erneut!",
-      "COMMAND_NOT_FOUND": "Der zugehörige Command wurde nicht gefunden!",
-      "COMMAND_USER_NOT_FOUND": "Der User konnte nicht gefunden werden!",
-      "COMMAND_TRY_AGAIN": "Ich arbeite gerade, bitte versuche es in Kürze erneut!"
     }
   }
 }
