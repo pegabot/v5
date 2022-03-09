@@ -33,10 +33,10 @@ export class InteractionManager {
 
   register(command: BotCommand) {
     if (this.commands.has(command.data.name)) {
-      return this.bot.logger.info(`Command (${command.data.name}) exists already.`);
+      return this.bot.logger.info(`Command (${this.bot.i18n.__(command.data.name)}) exists already.`);
     }
 
-    this.bot.logger.info(`registering command (${command.data.name})`);
+    this.bot.logger.info(`registering command (${this.bot.i18n.__(command.data.name)})`);
 
     // if we have a specific permission set, we need to disable the command for all users
     if (command.data.permissions) command.data.defaultPermission = false;
