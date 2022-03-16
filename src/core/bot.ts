@@ -16,8 +16,13 @@ import { TaskManager } from "./managers/TaskManager";
 
 export class Bot {
   client = new Client({
-    intents: new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_MESSAGES]),
-    partials: ["MESSAGE", "CHANNEL", "REACTION"],
+    intents: new Intents([
+      Intents.FLAGS.GUILDS,
+      Intents.FLAGS.GUILD_INTEGRATIONS,
+      Intents.FLAGS.GUILD_MESSAGES,
+      Intents.FLAGS.DIRECT_MESSAGES,
+      Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+    ]),
   });
 
   PluginManager = new PluginManager(this);

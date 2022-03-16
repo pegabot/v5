@@ -44,6 +44,15 @@
         }
       }
     },
+    "quiz": {
+      "command": {
+        "quiz": {
+          "description": "Das offizielle Geek Quiz",
+          "name": "quiz",
+          "noSessionForYou": "Scheinbar spielst du gerade eine Partie oder hast schon eine Partie gespielt."
+        }
+      }
+    },
     "roleplaying": {
       "command": {
         "name": {

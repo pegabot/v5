@@ -1,90 +1,99 @@
 {
-	"constants": {
-		"messages": {
-			"COMMAND_INTERNAL_ERROR": "An error ocurred, pleasy try again later!",
-			"COMMAND_NOT_FOUND": "The requested command couldn't be found!",
-			"COMMAND_TRY_AGAIN": "I'm working right now, pleasy try again shortly!",
-			"COMMAND_USER_NOT_FOUND": "The user couldn't be found!"
-		}
-	},
-	"plugin": {
-		"default": {
-			"command": {
-				"invite": {
-					"buttonText": "Invite me!",
-					"description": "Invite this bot to your server!",
-					"name": "invite",
-					"response": "Here you go 🎉"
-				},
-				"language": {
-					"description": "Set the language this bot uses on this server.",
-					"locale": {
-						"de": "German",
-						"en": "English",
-						"none": "none"
-					},
-					"name": "language",
-					"option": {
-						"language": {
-							"choice": {
-								"de": "German",
-								"en": "English"
-							},
-							"description": "Choose a language for this server.",
-							"name": "language"
-						}
-					},
-					"response": "Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed.",
-					"same": "Hey, looks like everything will stay the same 🤣"
-				},
-				"ping": {
-					"description": "Ping Pong 🏓",
-					"name": "ping",
-					"response": "Pong 🏓"
-				}
-			}
-		},
-		"roleplaying": {
-			"command": {
-				"name": {
-					"description": "Create your own character name.",
-					"name": "name",
-					"option": {
-						"gender": {
-							"choice": {
-								"female": "Female",
-								"male": "Male"
-							},
-							"description": "What gender do you want your name to be?",
-							"name": "gender"
-						},
-						"language": {
-							"choice": {
-								"de": "German",
-								"en": "English",
-								"ww": "Winterwald"
-							},
-							"description": "What language do you want your name to be?",
-							"name": "language"
-						}
-					},
-					"response": "Your randomly generated name is: `{{name}}` 🎉"
-				},
-				"roll": {
-					"description": "powered by Rollbutler",
-					"dice_not_found": "The dice has unfortunately fallen off the table. I cannot perform a reroll",
-					"name": "roll",
-					"option": {
-						"command": {
-							"description": "dice command",
-							"name": "dice"
-						}
-					},
-					"reroll": "Reroll",
-					"response": "I throw some dice for you 🎲",
-					"rules": "Dice Instructions"
-				}
-			}
-		}
-	}
+  "constants": {
+    "messages": {
+      "COMMAND_INTERNAL_ERROR": "An error ocurred, pleasy try again later!",
+      "COMMAND_NOT_FOUND": "The requested command couldn't be found!",
+      "COMMAND_TRY_AGAIN": "I'm working right now, pleasy try again shortly!",
+      "COMMAND_USER_NOT_FOUND": "The user couldn't be found!"
+    }
+  },
+  "plugin": {
+    "default": {
+      "command": {
+        "invite": {
+          "buttonText": "Invite me!",
+          "description": "Invite this bot to your server!",
+          "name": "invite",
+          "response": "Here you go 🎉"
+        },
+        "language": {
+          "description": "Set the language this bot uses on this server.",
+          "locale": {
+            "de": "German",
+            "en": "English",
+            "none": "none"
+          },
+          "name": "language",
+          "option": {
+            "language": {
+              "choice": {
+                "de": "German",
+                "en": "English"
+              },
+              "description": "Choose a language for this server.",
+              "name": "language"
+            }
+          },
+          "response": "Changed the language from `{{old}}` to `{{new}}`. It may take a while for the change to be completed.",
+          "same": "Hey, looks like everything will stay the same 🤣"
+        },
+        "ping": {
+          "description": "Ping Pong 🏓",
+          "name": "ping",
+          "response": "Pong 🏓"
+        }
+      }
+    },
+    "quiz": {
+      "command": {
+        "quiz": {
+          "description": "The official Geek Quiz",
+          "name": "quiz",
+          "noSessionForYou": "Apparently you are playing a game or have already played a game."
+        }
+      }
+    },
+    "roleplaying": {
+      "command": {
+        "name": {
+          "description": "Create your own character name.",
+          "name": "name",
+          "option": {
+            "gender": {
+              "choice": {
+                "female": "Female",
+                "male": "Male"
+              },
+              "description": "What gender do you want your name to be?",
+              "name": "gender"
+            },
+            "language": {
+              "choice": {
+                "de": "German",
+                "en": "English",
+                "ww": "Winterwald"
+              },
+              "description": "What language do you want your name to be?",
+              "name": "language"
+            }
+          },
+          "response": "Your randomly generated name is: `{{name}}` 🎉"
+        },
+        "roll": {
+          "description": "powered by Rollbutler",
+          "dice_not_found": "The dice has unfortunately fallen off the table. I cannot perform a reroll",
+          "name": "roll",
+          "option": {
+            "command": {
+              "description": "dice command",
+              "name": "dice"
+            }
+          },
+          "reroll": "Reroll",
+          "response": "I throw some dice for you 🎲",
+          "rules": "Dice Instructions"
+        }
+      }
+    }
+  }
 }

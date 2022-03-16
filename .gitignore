@@ -3,3 +3,7 @@ node_modules/
 .DS_Store
 build/
 yarn-error.log
+
+# Plugin `quiz`
+quizData.json
+voucherData.json
