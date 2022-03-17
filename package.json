@@ -1,6 +1,6 @@
 {
   "name": "@pegabot/v5",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "The fifth iteration and second generation of @pegabot on Discord",
   "repository": {
     "type": "git",
