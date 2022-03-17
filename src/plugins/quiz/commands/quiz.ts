@@ -35,9 +35,10 @@ QuizPlugin.registerCommand({
 
     if (isProduction()) {
       let existingSession = await QuizPlugin.store.get(sessionKey);
-      if (existingSession) {
+      if (existingSession.won) {
         return interaction.editReply("Scheinbar spielst du gerade eine Partie oder hast schon eine Partie gespielt.");
       }
+      await QuizPlugin.store.delete(sessionKey);
     }
 
     interaction.editReply("Ich habe dir eine Privatnachricht geschickt, schau bitte in deine Privatnachrichten 🖖.");
