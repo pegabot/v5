@@ -14,8 +14,8 @@ const generateParams = (dice: string, locale: string): URLSearchParams => {
   params.append("source", "Pegabot");
   params.append("user_id", "1");
   params.append("usr", "Pegabot");
-  params.append("api_key", process.env.ROLLBUTLER_KEY || "");
-  params.append("api_pass", process.env.ROLLBUTLER_PASS || "");
+  params.append("api_key", process.env.ROLEPLAYING_ROLLBUTLER_KEY || "");
+  params.append("api_pass", process.env.ROLEPLAYING_ROLLBUTLER_PASS || "");
   params.append("roll", dice);
   params.append("logit", "true");
   params.append("lang", locale.toUpperCase());

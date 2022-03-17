@@ -55,12 +55,13 @@ const roll = async (dice: string, interaction: ModifiedInteraction | ButtonInter
 
   try {
     rollbutlerResponse = JSON.parse(rollbutlerResponse);
-  } catch {
-    return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+  } catch (error) {
+    Roleplaying.logger.warn(`an error occured while parsing the response recieved from RollButler => response: ${rollbutlerResponse}, error: ${error}`);
+    return interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
   }
 
   const channel = await interaction.channel?.fetch();
-  if (!channel) return interaction.reply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+  if (!channel) return interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
 
   const successRow = new MessageActionRow().addComponents(
     // generateTranslation "plugin.roleplaying.command.roll.reroll"

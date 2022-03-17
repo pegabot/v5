@@ -11,6 +11,7 @@ class Roleplaying extends BotPlugin {
   arg = "roleplaying";
   envs = ["ROLEPLAYING_ROLLBUTLER_KEY", "ROLEPLAYING_ROLLBUTLER_PASS"];
   store = this.getDatastore();
+  logger = this.getLogger();
 }
 
 export default new Roleplaying();
