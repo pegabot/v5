@@ -9,7 +9,7 @@ import { BotPlugin } from "../../core/structures/BotPlugin";
 class Roleplaying extends BotPlugin {
   name = "Roleplaying";
   arg = "roleplaying";
-  envs = ["ROLLBUTLER_KEY", "ROLLBUTLER_PASS"];
+  envs = ["ROLEPLAYING_ROLLBUTLER_KEY", "ROLEPLAYING_ROLLBUTLER_PASS"];
   store = this.getDatastore();
 }
 

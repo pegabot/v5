@@ -9,6 +9,7 @@ import prettyMs from "pretty-ms";
 import { colors } from "../../../constants/colors";
 import { messages } from "../../../constants/messages";
 import { bot } from "../../../main";
+import { isProduction } from "../../../utils/isProduction";
 import { stripIndents } from "../../../utils/stripIndents";
 import QuizPlugin from "../plugin";
 
@@ -27,23 +28,24 @@ QuizPlugin.registerCommand({
     await interaction.deferReply({ ephemeral: true });
 
     if (!QuizPlugin.voucherData || QuizPlugin.voucherData?.length < 1 || !QuizPlugin.quizData) {
-      console.log(QuizPlugin.voucherData, QuizPlugin.quizData);
       return interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
     }
 
     const sessionKey = `${QuizPlugin.quizData.name}-${interaction.user.id}`;
 
-    let existingSession = await QuizPlugin.store.get(sessionKey);
-    if (existingSession) {
-      // generateTranslation "plugin.quiz.command.quiz.noSessionForYou"
-      return interaction.editReply(bot.i18n.__({ phrase: "plugin.quiz.command.quiz.noSessionForYou", locale }));
+    if (isProduction()) {
+      let existingSession = await QuizPlugin.store.get(sessionKey);
+      if (existingSession) {
+        return interaction.editReply("Scheinbar spielst du gerade eine Partie oder hast schon eine Partie gespielt.");
+      }
     }
 
-    QuizPlugin.store.set(sessionKey, {
-      running: true,
-    });
+    interaction.editReply("Ich habe dir eine Privatnachricht geschickt, schau bitte in deine Privatnachrichten 🖖.");
 
     const voucherCode = QuizPlugin.voucherData.shift();
+
+    if (!voucherCode) return interaction.editReply(bot.i18n.__({ phrase: messages.COMMAND_INTERNAL_ERROR, locale }));
+
     const questions = QuizPlugin.quizData.questions.sort(() => Math.random() - Math.random()).slice(0, numberOfQuestions);
 
     const filter = (reaction: MessageReaction, user: User) =>
@@ -52,28 +54,36 @@ QuizPlugin.registerCommand({
     let winning = true;
     let counter = 0;
 
-    // todo: change the texts
+    try {
+      await interaction.user.send({
+        embeds: [
+          new MessageEmbed({
+            footer: { text: `SessionId - ${sessionKey}` },
+          })
+            .setColor(colors.yellow)
+            .setTitle(`${QuizPlugin.quizData.name} - das QuizPlugin!`)
+            .setDescription(
+              stripIndents(`
+        Wie viel Geek steckt in dir? Zeig es uns und beantworte folgende Fragen rund um Filme, Serien, Bücher, Rollen-/Brettspiele und weitere absolut relevante Themen des Geek Daseins.
 
-    interaction.user.send({
-      embeds: [
-        new MessageEmbed({
-          footer: { text: `SessionId - ${sessionKey}` },
-        })
-          .setColor(colors.yellow)
-          .setTitle(`CONspiracy VII - das QuizPlugin!`)
-          .setDescription(
-            stripIndents(`
-        Wie viel Geek steckt in dir? Zeig es uns und beantworte folgende Fragen rund um Filme, Serien, Bücher, Rollen-/Brettspiele und weitere absolut relevante Themen des Geek Daseins. 
-        
-        Zur Beantwortung der Fragen hast du ${prettyMs(expiresInterval)} Zeit. 
-        Beantworte uns folgende Fragen richtig und erhalte sofort einen Gutscheincode für das Shadowrun Grundregelwerk.
+        Wenn du drei Fragen innerhalb von ${prettyMs(
+          expiresInterval,
+        )} richtig beantwortest, erhältst du sofort einen 20% Rabattcode für den Pegasus Spiele Onlineshop [LINK] - einlösbar bis 31. März auf alle sofort lieferbaren, nicht preisgebundenen Artikel. Gleichzeitig ist es uns eine Herzensangelegenheit diejenigen zu unterstützen, die vor dem Krieg in der Ukraine flüchten müssen. Daher spenden wir 20% des so erzielten Umsatzes an das Aktionsbündnis Katastrophenhilfe zugunsten der Ukraine-Nothilfe.
         
         Um die Fragen zu beantworten, klicke auf A, B oder C unterhalb der jeweiligen Frage.
+        
         Viel Erfolg! :four_leaf_clover:
       `) as string,
-          )
-          .setTimestamp(),
-      ],
+            )
+            .setTimestamp(),
+        ],
+      });
+    } catch {
+      return interaction.editReply(bot.i18n.__({ phrase: messages.CANT_SEND_PRIVATE_MESSAGE, locale }));
+    }
+
+    QuizPlugin.store.set(sessionKey, {
+      running: true,
     });
 
     for (const [index, question] of questions.entries()) {
@@ -85,7 +95,7 @@ QuizPlugin.registerCommand({
         .addField("🇨 - " + question.answers[2], "-----")
         .setTimestamp();
 
-      if (process.env.NODE_ENV !== "production") quizEmbed.addField("Richtige Antwort", ["🇦", "🇧", "🇨"][question.correctIndex]);
+      if (!isProduction()) quizEmbed.addField("Richtige Antwort", ["🇦", "🇧", "🇨"][question.correctIndex]);
 
       const runningQuizPlugin = await interaction.user.send({ embeds: [quizEmbed] });
       runningQuizPlugin.react("🇦");
@@ -110,18 +120,20 @@ QuizPlugin.registerCommand({
           if (winning) {
             interaction.user.send(
               stripIndents(`
-              Herzlichen Glückwunsch – du hast alle Fragen richtig beantwortet! :tada:
-              
-              ${voucherCode}
+              Herzlichen Glückwunsch, du hast alle drei Fragen richtig beantwortet!
 
-              Dein Gutscheincode wird gerade erstellt. Bitte warte einen Moment  - dein Gutscheincode wird dir hier in wenigen Sekunden angezeigt.\n\n
-              `),
+              Dein Gutscheincode lautet *${voucherCode.code}*. Du kannst ihn ab sofort und bis spätestens 31.3.2022 unter www.pegasusshop.de einlösen und erhältst dann sofort 20% Rabatt auf deine Bestellung sofort lieferbarer, nicht preisgebundener Artikel. 
+                          
+              Falls du regelmäßige Updates zu Aktionen wie dieser, aber auch zu Events und Angeboten erhalten möchtest, dann abonniere jetzt unseren Newsletter auf www.pegasus.de/newsletter. Schau außerdem auf www.conspiracy-con.de vorbei und entdecke die anderen CONspiracy-Aktionen!
+                          
+              Dein Pegabot :robot:     `),
             );
             QuizPlugin.store.set(sessionKey, {
               running: false,
               won: true,
               voucher: voucherCode,
             });
+            QuizPlugin.store.set(`used-voucher-${voucherCode.code}`, true);
           } else {
             interaction.user.send(
               stripIndents(
@@ -140,6 +152,9 @@ QuizPlugin.registerCommand({
               running: false,
               won: false,
             });
+
+            // session was not won by the user so we need to push the voucher back to the voucher pool
+            QuizPlugin.voucherData?.push(voucherCode);
           }
         }
       });

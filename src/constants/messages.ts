@@ -13,4 +13,6 @@ export enum messages {
   COMMAND_USER_NOT_FOUND = "constants.messages.COMMAND_USER_NOT_FOUND",
   // generateTranslation "constants.messages.COMMAND_TRY_AGAIN"
   COMMAND_TRY_AGAIN = "constants.messages.COMMAND_TRY_AGAIN",
+  // generateTranslation "constants.messages.CANT_SEND_PRIVATE_MESSAGE"
+  CANT_SEND_PRIVATE_MESSAGE = "constants.messages.CANT_SEND_PRIVATE_MESSAGE",
 }

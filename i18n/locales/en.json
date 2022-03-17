@@ -1,6 +1,7 @@
 {
   "constants": {
     "messages": {
+      "CANT_SEND_PRIVATE_MESSAGE": "I couldn't send you a private message. Please check your Discord settings to see if you have it enabled!",
       "COMMAND_INTERNAL_ERROR": "An error ocurred, pleasy try again later!",
       "COMMAND_NOT_FOUND": "The requested command couldn't be found!",
       "COMMAND_TRY_AGAIN": "I'm working right now, pleasy try again shortly!",
@@ -48,8 +49,7 @@
       "command": {
         "quiz": {
           "description": "The official Geek Quiz",
-          "name": "quiz",
-          "noSessionForYou": "Apparently you are playing a game or have already played a game."
+          "name": "quiz"
         }
       }
     },
