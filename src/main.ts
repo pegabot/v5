@@ -34,6 +34,8 @@ export const bot = new Bot(logger);
 
   // get the args passed to this process and register the modules
   const args = await getArgs(bot);
+  bot.args = args;
+
   bot.PluginManager.registerModules(args);
 
   if (process.env.NODE_ENV !== "development") {

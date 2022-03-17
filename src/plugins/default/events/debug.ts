@@ -4,8 +4,11 @@
  * (see https://github.com/pegabot/v5/blob/main/LICENSE for details)
  */
 
+import { bot } from "../../../main";
 import Default from "../plugin";
 
 Default.registerEvent("debug", (message) => {
-  Default.logger.debug(message);
+  if (bot.args["debug"]) {
+    Default.logger.debug(message);
+  }
 });

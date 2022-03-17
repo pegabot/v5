@@ -33,6 +33,8 @@ export class Bot {
 
   i18n = new I18n();
 
+  args: { [key: string]: any } = {};
+
   constructor(public logger: winston.Logger) {
     this.ProcessEventManager.setupEvents();
     this.i18n.configure({
