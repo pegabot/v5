@@ -68,7 +68,7 @@ QuizPlugin.registerCommand({
 
         Wenn du drei Fragen innerhalb von ${prettyMs(
           expiresInterval,
-        )} richtig beantwortest, erhältst du sofort einen 20% Rabattcode für den Pegasus Spiele Onlineshop [LINK] - einlösbar bis 31. März auf alle sofort lieferbaren, nicht preisgebundenen Artikel. Gleichzeitig ist es uns eine Herzensangelegenheit diejenigen zu unterstützen, die vor dem Krieg in der Ukraine flüchten müssen. Daher spenden wir 20% des so erzielten Umsatzes an das Aktionsbündnis Katastrophenhilfe zugunsten der Ukraine-Nothilfe.
+        )} richtig beantwortest, erhältst du sofort einen 20% Rabattcode für den [Pegasus Spiele Onlineshop](https://pegasusshop.de) - einlösbar bis 31. März auf alle sofort lieferbaren, nicht preisgebundenen Artikel. Gleichzeitig ist es uns eine Herzensangelegenheit diejenigen zu unterstützen, die vor dem Krieg in der Ukraine flüchten müssen. Daher spenden wir 20% des so erzielten Umsatzes an das Aktionsbündnis Katastrophenhilfe zugunsten der Ukraine-Nothilfe.
         
         Um die Fragen zu beantworten, klicke auf A, B oder C unterhalb der jeweiligen Frage.
         
@@ -122,9 +122,9 @@ QuizPlugin.registerCommand({
               stripIndents(`
               Herzlichen Glückwunsch, du hast alle drei Fragen richtig beantwortet!
 
-              Dein Gutscheincode lautet *${voucherCode.code}*. Du kannst ihn ab sofort und bis spätestens 31.3.2022 unter www.pegasusshop.de einlösen und erhältst dann sofort 20% Rabatt auf deine Bestellung sofort lieferbarer, nicht preisgebundener Artikel. 
+              Dein Gutscheincode lautet ***${voucherCode.code}***. Du kannst ihn ab sofort und bis spätestens 31.3.2022 unter https://pegasusshop.de einlösen und erhältst dann sofort 20% Rabatt auf deine Bestellung sofort lieferbarer, nicht preisgebundener Artikel. 
                           
-              Falls du regelmäßige Updates zu Aktionen wie dieser, aber auch zu Events und Angeboten erhalten möchtest, dann abonniere jetzt unseren Newsletter auf www.pegasus.de/newsletter. Schau außerdem auf www.conspiracy-con.de vorbei und entdecke die anderen CONspiracy-Aktionen!
+              Falls du regelmäßige Updates zu Aktionen wie dieser, aber auch zu Events und Angeboten erhalten möchtest, dann abonniere jetzt unseren Newsletter auf https://pegasus.de/newsletter. Schau außerdem auf https://conspiracy-con.de vorbei und entdecke die anderen CONspiracy-Aktionen!
                           
               Dein Pegabot :robot:     `),
             );
@@ -142,7 +142,7 @@ QuizPlugin.registerCommand({
               
                 Leider waren jedoch eine oder mehrere deiner Antworten nicht korrekt. Versuche es noch einmal :wink:
                 
-                Du möchtest regelmäßig die neuesten Updates zu unseren Events, Aktionen und Angeboten erhalten? Dann abonniere unseren Newsletter unter https://pegasus.de/newsletter 
+                Du möchtest regelmäßig die neuesten Updates zu unseren Events, Aktionen und Angeboten erhalten? Dann abonniere unseren Newsletter unter https://pegasus.de/newsletter
                 
                 Dein Pegabot :robot:
                 `,
