@@ -34,11 +34,20 @@ QuizPlugin.registerCommand({
     const sessionKey = `${QuizPlugin.quizData.name}-${interaction.user.id}`;
 
     if (isProduction()) {
-      let existingSession = await QuizPlugin.store.get(sessionKey);
-      if (existingSession.won) {
-        return interaction.editReply("Scheinbar spielst du gerade eine Partie oder hast schon eine Partie gespielt.");
+      try {
+        let existingSession = await QuizPlugin.store.get(sessionKey);
+        if (existingSession) {
+          if ((existingSession.hasOwnProperty("running") && existingSession.running) || (existingSession.hasOwnProperty("won") && existingSession.won)) {
+            return interaction.editReply("Scheinbar spielst du gerade eine Partie oder hast schon eine Partie gespielt.");
+          }
+          await QuizPlugin.store.delete(sessionKey);
+        }
+      } catch (err) {
+        await QuizPlugin.store.delete(sessionKey);
+        return interaction.editReply(
+          "Ein Problem beim Verarbeiten deiner Quizsession ist aufgetreten. Ich habe das Problem soeben behoben ⚒️. Bitte versuche es direkt erneut!",
+        );
       }
-      await QuizPlugin.store.delete(sessionKey);
     }
 
     interaction.editReply("Ich habe dir eine Privatnachricht geschickt, schau bitte in deine Privatnachrichten 🖖.");
@@ -85,6 +94,10 @@ QuizPlugin.registerCommand({
 
     QuizPlugin.store.set(sessionKey, {
       running: true,
+      user: {
+        id: interaction.user.id,
+        tag: interaction.user.tag,
+      },
     });
 
     for (const [index, question] of questions.entries()) {
@@ -133,8 +146,15 @@ QuizPlugin.registerCommand({
               running: false,
               won: true,
               voucher: voucherCode,
+              user: {
+                id: interaction.user.id,
+                tag: interaction.user.tag,
+              },
             });
-            QuizPlugin.store.set(`used-voucher-${voucherCode.code}`, true);
+            QuizPlugin.store.set(`used-voucher-${voucherCode.code}`, {
+              used: true,
+              session: sessionKey,
+            });
           } else {
             interaction.user.send(
               stripIndents(
@@ -152,6 +172,10 @@ QuizPlugin.registerCommand({
             QuizPlugin.store.set(sessionKey, {
               running: false,
               won: false,
+              user: {
+                id: interaction.user.id,
+                tag: interaction.user.tag,
+              },
             });
 
             // session was not won by the user so we need to push the voucher back to the voucher pool
