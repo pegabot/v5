@@ -70,4 +70,4 @@ jobs:
             run: yarn i18n
           
           - name: Checking if data has changed
-            run: sh ./scripts/i18n/action.sh
+            run: sh ./i18n/scripts/action.sh

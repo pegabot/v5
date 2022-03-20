@@ -15,7 +15,7 @@ i18n.configure({
   defaultLocale: "en",
   locales: ["en", "de"],
   objectNotation: true,
-  directory: path.join(__dirname, "../../i18n/locales"),
+  directory: path.join(__dirname, "../locales"),
   syncFiles: true,
 });
 
@@ -34,7 +34,7 @@ const processData = () => {
         }
       }
 
-      glob(path.resolve(__dirname, "../../i18n/**/*.json"), async (error, files) => {
+      glob(path.resolve(__dirname, "../**/*.json"), async (error, files) => {
         for (const file of files) {
           sortJson.overwrite(file, { ignoreCase: true, depth: 99999 });
         }

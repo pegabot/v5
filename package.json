@@ -15,7 +15,7 @@
     "container:dev:build": "docker build -t pegabot:dev .",
     "container:dev:start": " docker run --name pegabot --env-file .env --rm --link redis:redis pegabot:dev",
     "dev": "nodemon .  --signal SIGINT",
-    "i18n": "node scripts/i18n/generate.js",
+    "i18n": "node i18n/scripts/generate.js",
     "prepare": "husky install",
     "start": "node .",
     "test": "jest . --verbose --passWithNoTests"
