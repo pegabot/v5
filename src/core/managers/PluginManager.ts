@@ -43,22 +43,26 @@ export class PluginManager {
       this.bot.panic("plugin (Default) is not available but required.");
     }
 
-    for (const plugin of [...this.plugins.values()]) {
+    [...this.plugins.values()].forEach((plugin) => {
       if (plugin.arg && !argv[plugin.arg]) {
         this.bot.logger.warn(`plugin (${plugin.name}) was not activated. Removing from loaded plugins`);
-        this.plugins = this.plugins.filter((p) => p.name !== plugin.name);
-        continue;
+        this.plugins.delete(plugin.name);
+        return;
+      }
+
+      if (plugin.envs?.length || 0 > 0) {
+        for (const key of plugin.envs as string[]) {
+          if (!process.env[key]) {
+            this.bot.logger.warn(`missing env (${key}) for plugin (${plugin.name}). The plugin remains disabled.`);
+            this.plugins.delete(plugin.name);
+            return;
+          }
+        }
       }
 
       if (plugin.postLoad) plugin.postLoad();
 
       this.bot.logger.info(`enabling plugin (${plugin.name})`);
-
-      if (plugin.envs?.length || 0 > 0) {
-        for (const key of plugin.envs as string[]) {
-          if (!process.env[key]) this.bot.panic(`missing env (${key}) for plugin (${plugin.name}).`);
-        }
-      }
 
       if (plugin.events.length > 0) {
         for (const event of plugin.events) {
@@ -77,6 +81,6 @@ export class PluginManager {
           this.bot.TaskManager.register(task);
         }
       }
-    }
+    });
   }
 }
