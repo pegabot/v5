@@ -50,6 +50,8 @@ export class PluginManager {
         continue;
       }
 
+      if (plugin.postLoad) plugin.postLoad();
+
       this.bot.logger.info(`enabling plugin (${plugin.name})`);
 
       if (plugin.envs?.length || 0 > 0) {

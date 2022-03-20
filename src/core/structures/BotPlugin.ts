@@ -46,6 +46,11 @@ export abstract class BotPlugin {
    * @example node . --arg
    */
   arg?: string;
+  /**
+   *
+   * @optional will be called if plugin was sucessfully loaded
+   */
+  postLoad?: () => any;
 
   getDatastore() {
     const store = new Keyv(process.env.REDIS_URL, { namespace: `plugin-${this.name}-${process.env.NODE_ENV}` });
