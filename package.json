@@ -48,7 +48,7 @@
     "i18n": "^0.14.2",
     "keyv": "^4.1.1",
     "pretty-ms": "^7.0.1",
-    "winston": "^3.6.0",
+    "winston": "^3.7.2",
     "yargs": "^17.4.0"
   },
   "devDependencies": {
