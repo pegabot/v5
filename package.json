@@ -40,13 +40,13 @@
     }
   },
   "dependencies": {
-    "@keyv/redis": "^2.3.3",
+    "@keyv/redis": "^2.3.6",
     "bent": "^7.3.12",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "glob": "^8.0.1",
     "i18n": "^0.14.2",
-    "keyv": "^4.2.2",
+    "keyv": "^4.2.9",
     "pretty-ms": "^7.0.1",
     "winston": "^3.7.2",
     "yargs": "^17.4.1"
