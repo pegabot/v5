@@ -648,10 +648,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/i18n@^0.13.2":
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/@types/i18n/-/i18n-0.13.2.tgz#23769cc54c763e77a1b03048c439d9e8f59a1f1f"
-  integrity sha512-FdzABEs0NNi99xN+FgWAAeCenaNo+5jolCxr2RhQrySinNPH8rkgjbw6OMGW9+HSgnGeuI7C6y2lC83m6JN3bg==
+"@types/i18n@^0.13.3":
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/@types/i18n/-/i18n-0.13.3.tgz#88db5b33ccbbd57de54c8c2da01002e8fb48efc3"
+  integrity sha512-o6MlrxjGUDANSmMmQ6p/f7ea3+kJFeNWebxylKE3pLjWbIa0Npr/DT2Qf941oqovdopadAfV+PuBMTKg4p37NA==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"
